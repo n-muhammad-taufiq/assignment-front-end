@@ -1,11 +1,14 @@
+import ProtectedLayout from "./components/ProtectedLayout"
 import Sidebar from "./components/Sidebar"
+import { Routes,Route } from "react-router-dom"
+
 
 function App() {
 
   return (
-   <>
-   <Sidebar></Sidebar>
-   </>
+   <Routes>
+    <Route path="/" element={<ProtectedLayout></ProtectedLayout>}></Route>
+   </Routes>
   )
 }
 

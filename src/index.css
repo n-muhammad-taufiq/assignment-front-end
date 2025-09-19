@@ -1,1 +1,10 @@
-@import 'tailwindcss'
+@import 'tailwindcss';
+
+@font-face {
+  font-family: "raleway";
+  src: url('./assets/fonts/Raleway-Regular.ttf')
+}
+
+body{
+  font-family: raleway;
+}

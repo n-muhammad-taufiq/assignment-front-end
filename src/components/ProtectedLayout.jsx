@@ -6,7 +6,7 @@ const ProtectedLayout = () => {
   return (
     <div className='flex'>
       <Sidebar></Sidebar>
-      <div className='flex flex-col'>
+      <div className='flex flex-col gap-y-5 w-full'>
       <Outlet></Outlet>
       </div>
     </div> 

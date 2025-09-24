@@ -1,0 +1,201 @@
+import React, { useEffect, useRef, useState } from 'react'
+import Loading from './Loading';
+
+const UpdateDoctor = ({doctor,setCurrentDoctor,setShouldUpdateDoctor,setActionStatus}) => {
+     const [doctorDetails,setDoctorDetails]=useState({id:doctor.id,name:doctor.name,specialty:doctor.specialty,dateOfBirth:doctor.dateOfBirth.split('T')[0],emailAddress:doctor.emailAddress,status:doctor.status,countryCode:doctor.countryCode,contactNumber:doctor.contactNumber,profilePhoto:doctor.profilePhoto,userId:doctor.userId});
+     const [shouldShowStatusOptions,setShouldShowStatusOptions]=useState(false);
+     const [imagePreview,setImagePreview]=useState(doctorDetails.profilePhoto);
+     const formRef=useRef(null);
+     const imageInputRef=useRef(null);
+     const [profilePhoto,setProfilePhoto]=useState(null);
+     const [isLoading,setIsLoading]=useState(false);
+
+     useEffect(()=>{
+        console.log(doctorDetails);
+     })
+
+     const handleSubmit=async (event)=>{
+        event.preventDefault();
+        setIsLoading(true); 
+        const form=formRef.current;
+        if(form.checkValidity()){
+           await handleUpdateDoctor();
+        }
+        else{
+            form.reportValidity();
+        }
+     }
+ 
+     const handleUpdateDoctor=async()=>{
+       const data=doctorDetails;
+       data.userId=doctor.userId;
+       if(profilePhoto){
+         const imageUrl=await handleUploadImage();
+         data.profilePhoto=imageUrl;
+       }
+       console.log(data);
+       setCurrentDoctor(data);
+       
+       try {
+         const responseObj=await fetch('http://localhost:3000/doctors',{
+           headers:{
+               "Content-Type":"application/json"
+           },
+           method:'PUT',
+           body:JSON.stringify(data)
+         });
+         const response=await responseObj.json();
+         if(responseObj.ok){
+            setActionStatus('Doctor Updated Successfully')
+            setIsLoading(false);
+            setShouldUpdateDoctor(false);   
+         }
+         console.log('response for update query:',response)
+       } catch (error) {
+         console.log(error);
+       }
+     }
+ 
+     const handleUploadImage=async ()=>{
+         const formData=new FormData();
+         console.log(doctorDetails);
+         formData.append("file",profilePhoto);
+         formData.append('upload_preset','tectra_clinic');
+         try{
+           const response=await fetch('https://api.cloudinary.com/v1_1/desuv0tki/image/upload',{
+             method:'POST',
+             body:formData
+           });
+           const data=await response.json();
+           console.log(data);
+           console.log(data.secure_url);
+           return data.secure_url;
+           
+         }
+         catch(error){
+           console.log(error);
+         }
+     }
+
+     return (
+    <>
+    <div className='fixed top-0 left-0 right-0 bottom-0 bg-black/90 flex items-center justify-center py-3'>
+    <div className='flex flex-col gap-y-14 items-start bg-white px-1  rounded-lg text-sm h-full max-w-full font-bold overflow-y-auto hide-scrollbar'>
+
+        
+        <div className='flex sticky top-0 w-full justify-center pt-1'>
+        <button onClick={()=>{
+        setShouldUpdateDoctor(false);
+        }} className='absolute left-0 hover:bg-gray-50 duration-500 h-5 w-5 rounded-full flex items-center justify-center cursor-pointer '>
+        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" class="bi bi-x" viewBox="0 0 16 16">
+        <path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708"/>
+        </svg>
+        </button>
+        <h1 className='pt-2'>Update Doctor</h1>
+        </div>
+        
+        <img src={imagePreview} onClick={() => {
+        imageInputRef.current.click();
+        }} className='rounded-full h-30 w-30 object-cover self-center hover:opacity-50 duration-500 cursor-pointer' alt="" />
+        
+           
+        <input onChange={async (image) => {
+            console.log(image);
+            const previewURL = URL.createObjectURL(image.target.files[0]);
+            setImagePreview(previewURL);
+            setProfilePhoto(image.target.files[0]);
+        }} ref={imageInputRef} className='hidden' type="file" accept='image/*' />
+
+        <p className='self-center'>Profile Picture</p>
+
+        <form ref={formRef} onSubmit={(event)=>{
+            handleSubmit(event);
+        }} className='flex flex-col gap-y-5 px-8'>
+
+            <div className='flex flex-col gap-y-4'>
+                <label className='text-gray-700 font-bold' htmlFor="name">Name</label>
+                <input required onChange={(event) => {
+                    setDoctorDetails({ ...doctorDetails, name: event.target.value })
+                }} id='name' className='border border-gray-100 shadow-sm pl-2 py-2 rounded-lg outline-none invalid:border-2 invalid:ring-2 invalid:ring-offset-2 invalid:ring-red-400 invalid:border-red-400 duration-500' value={doctorDetails.name} type="text" />
+            </div>
+
+            <div className='flex flex-col gap-y-4'>
+                <label className='text-gray-700 font-bold' htmlFor="specialty">Specialty</label>
+                <input required onChange={(event) => {
+                    setDoctorDetails({ ...doctorDetails, specialty: event.target.value })
+                }} id='specialty' className='border border-gray-100 shadow-sm pl-2 py-2 rounded-lg outline-none invalid:border-2 invalid:ring-2 invalid:ring-offset-2 invalid:ring-red-400 invalid:border-red-400 duration-500' value={doctorDetails.specialty} type="text" />
+            </div>
+
+            <div className='flex gap-x-5'>
+                <div className='flex flex-col gap-y-4'>
+                    <label className='text-gray-700 font-bold' htmlFor="dateOfBirth">Date of Birth</label>
+                    <input type="date" required onChange={(event) => {
+                        setDoctorDetails({ ...doctorDetails, dateOfBirth: event.target.value })
+                    }} value={doctorDetails.dateOfBirth} className='outline-none border border-gray-100 shadow-sm pl-2 py-2 rounded-lg invalid:border-2 invalid:ring-2 invalid:ring-offset-2 invalid:ring-red-400 invalid:border-red-400 duration-500' />
+                </div>
+
+                <div className='flex flex-col gap-y-4'>
+                    <label className='text-gray-700 font-bold' htmlFor="emailAddress">Email Address</label>
+                    <input required onChange={(event) => {
+                        setDoctorDetails({ ...doctorDetails, emailAddress: event.target.value })
+                    }} id='emailAddress' value={doctorDetails.emailAddress} className='outline-none border border-gray-100 shadow-sm pl-2 py-2 rounded-lg invalid:border-2 invalid:ring-2 invalid:ring-offset-2 invalid:ring-red-400 invalid:border-red-400 duration-500' type="email" />
+                </div>
+            </div>
+
+            <div className='flex flex-col gap-y-4 w-full'>
+                <label className='text-gray-700 font-bold' htmlFor="status">Status</label>
+                <div onClick={() => {
+                    setShouldShowStatusOptions(!shouldShowStatusOptions);
+                }} className='relative flex justify-between items-center w-full border border-gray-50 rounded-lg shadow-sm px-2 py-2 cursor-pointer '>
+                    <p>{doctorDetails.status}</p>
+                    <svg className='bi bi-chevron-down fill-gray-500 mt-1 ' xmlns="http://www.w3.org/2000/svg" width="12" height="12" fill="currentColor" viewBox="0 0 16 16">
+                        <path fillRule="evenodd" d="M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708"/>
+                    </svg>
+                    {
+                        shouldShowStatusOptions &&
+                        <div className='absolute -bottom-15 left-0 right-0 border-2 border-gray-100 flex flex-col gap-y-2 bg-white text-xs z-20 rounded-sm px-4 py-2'>
+                            <button onClick={(event) => {
+                                event.preventDefault();
+                                setDoctorDetails({ ...doctorDetails, status: 'active' });
+                                setShouldShowStatusOptions(false);
+                            }} className='text-gray-700 font-bold hover:opacity-50 duration-500 cursor-pointer w-fit'>active</button>
+                            <button onClick={(event) => {
+                                event.preventDefault();
+                                setDoctorDetails({ ...doctorDetails, status: 'inactive' });
+                                setShouldShowStatusOptions(false);
+                            }} className='text-gray-700 font-bold hover:opacity-50 duration-500 cursor-pointer w-fit'>inactive</button>
+                        </div>
+                    }
+                </div>
+            </div>
+
+            <div className='flex gap-x-5 w-full'>
+                <div className='flex flex-col gap-y-4'>
+                    <label className='text-gray-700 font-bold'>Contact Number</label>
+                    <div className='flex items-center gap-x-2'>
+                        <span className='text-lg font-normal'>+</span>
+                        <input required onChange={(event) => {
+                            setDoctorDetails({ ...doctorDetails, countryCode: event.target.value })
+                        }} id='countryCode' value={`${doctorDetails.countryCode}`} className='outline-none border border-gray-100 shadow-sm pl-2 py-2 rounded-md w-10 invalid:border-2 invalid:ring-2 invalid:ring-offset-2 invalid:ring-red-400 invalid:border-red-400 duration-500' type="tel" maxLength={3} />
+                        <input required onChange={(event) => {
+                            setDoctorDetails({ ...doctorDetails, contactNumber: event.target.value })
+                        }} id='contactNumber' value={doctorDetails.contactNumber} className='outline-none border border-gray-100 shadow-sm pl-2 py-2 rounded-lg w-full invalid:border-2 invalid:ring-2 invalid:ring-offset-2 invalid:ring-red-400 invalid:border-red-400 duration-500' type="tel" maxLength={12} />
+                    </div>
+                </div>
+            </div>
+
+            <button type="submit" className='flex w-full justify-end text-gray-700 font-bold text-xs self-end cursor-pointer hover:opacity-50 duration-500 sticky bottom-0 right-0 py-4 bg-white'>Update</button>
+        </form>
+    </div>
+</div>
+{isLoading
+&&
+<Loading></Loading>
+}
+</>
+
+     )
+ 
+}
+
+export default UpdateDoctor;

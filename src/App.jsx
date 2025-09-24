@@ -9,6 +9,7 @@ function App() {
   return (
    <Routes>
     <Route path="/" element={<ProtectedLayout></ProtectedLayout>}>
+    <Route path="" element={<Dashboard></Dashboard>}></Route>
     </Route>
    </Routes>
   )

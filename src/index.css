@@ -5,6 +5,58 @@
   src: url('./assets/fonts/Raleway-Regular.ttf')
 }
 
+@keyframes fadeIn {
+  from{
+    opacity:0;
+  }
+  to{
+    opacity: 1;
+  }
+}
+
+@keyframes loading {
+  0%{
+    transform:scaleX(1);
+  }
+  25%{
+    transform:scaleX(1.5) translateX(-20px);
+  }
+  50%{
+    transform:scaleX(1) translateX(0);
+  }
+  75%{
+    transform:scaleX(1.5) translateX(20px);
+  }
+  100%{
+    transform:scaleX(1) translateX(0);
+  }
+  
+  
+}
+
 body{
   font-family: raleway;
+}
+.fade-in{
+  animation-name: fadeIn;
+  animation-duration: 0.7s;
+}
+.loading{
+  animation-name: loading;
+  animation-duration: 3s;
+  animation-iteration-count: infinite;
+  animation-timing-function:ease;
+}
+svg:focus{
+  outline:none; 
+}
+
+.hide-scrollbar::-webkit-scrollbar{
+  display: none;
+}
+th{
+  display:table-cell;
+}
+tr{
+  display: table-row;
 }

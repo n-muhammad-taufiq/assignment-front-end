@@ -2,6 +2,7 @@ import React from 'react'
 import StatisticCard from './StatisticCard'
 import Cashflow from './Cashflow'
 import Expenses from './Expenses'
+import DoctorsOverview from './DoctorsOverview'
 
 const Dashboard = () => {
   return (
@@ -33,6 +34,7 @@ const Dashboard = () => {
         }}></Cashflow>
         <Expenses></Expenses>
         </div>
+        <DoctorsOverview></DoctorsOverview>
     </div>
   )
 }

@@ -10,6 +10,7 @@ const AddDoctor = ({setShouldAddDoctor,allDoctors,setAllDoctors,setActionStatus}
      const formRef=useRef(null);
      const [profilePhoto,setProfilePhoto]=useState(null);
      const [isLoading,setIsLoading]=useState(false);
+     const [isSubmissionAttempted,setIsSubmissionAttempted]=useState(false);
 
      const handleSubmit=(event)=>{
         event.preventDefault();
@@ -80,7 +81,7 @@ const AddDoctor = ({setShouldAddDoctor,allDoctors,setAllDoctors,setActionStatus}
      <div className='fixed top-0 left-0 right-0 bottom-0 bg-black/90 flex items-center justify-center py-3'>
          <div className='flex flex-col gap-y-14 items-start bg-white px-1 rounded-lg text-sm h-full max-w-full font-bold overflow-y-auto hide-scrollbar'>
  
-              <div className='flex sticky top-0 w-full justify-center pt-1'>
+              <div className='bg-white z-20 pb-2 flex sticky top-0 w-full justify-center pt-1'>
               <button onClick={()=>{
                 setShouldAddDoctor(false);
               }} className='absolute left-0 hover:bg-gray-50 duration-500 h-5 w-5 rounded-full flex items-center justify-center cursor-pointer '>
@@ -102,7 +103,7 @@ const AddDoctor = ({setShouldAddDoctor,allDoctors,setAllDoctors,setActionStatus}
                 :
                 <span onClick={()=>{
                   imageInputRef.current.click();
-                }} className='self-center flex items-center justify-center h-30 w-30 bg-gray-300 rounded-full hover:opacity-50 duration-500 cursor-pointer'>
+                }} className='self-center p-2  flex items-center justify-center h-30 w-30 bg-gray-300 rounded-full hover:opacity-50 duration-500 cursor-pointer'>
                 <svg className='bi bi-person-fill fill-gray-200 ' xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16">
                 <path d="M3 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6"/>
                 </svg>
@@ -129,14 +130,14 @@ const AddDoctor = ({setShouldAddDoctor,allDoctors,setAllDoctors,setActionStatus}
                    <label className='text-gray-700 font-bold' htmlFor="name">Name</label>
                    <input onChange={(event)=>{
                      setDoctorDetailsInput({...doctorDetailsInput,name:event.target.value})
-                   }} id='name' className='border border-gray-100 shadow-sm pl-2 py-2 rounded-lg outline-none invalid:border-2 invalid:ring-2 invalid:ring-offset-2 invalid:ring-red-400 invalid:border-red-400 duration-500' value={doctorDetailsInput.name} required type="text" />
+                   }} id='name' className={`border border-gray-100 shadow-sm pl-2 py-2 rounded-lg outline-none invalid:border-2 ${isSubmissionAttempted ? 'invalid:ring-2 invalid:ring-offset-2 invalid:ring-red-400 invalid:border-red-400' : ''}  duration-500`} value={doctorDetailsInput.name} required type="text" />
                </div>
  
                <div className='flex flex-col gap-y-4'>
                    <label className='text-gray-700 font-bold' htmlFor="specialty">Specialty</label>
                    <input onChange={(event)=>{
                      setDoctorDetailsInput({...doctorDetailsInput,specialty:event.target.value})
-                   }} id='specialty' className='border border-gray-100 shadow-sm pl-2 py-2 rounded-lg outline-none invalid:border-2 invalid:ring-2 invalid:ring-offset-2 invalid:ring-red-400 invalid:border-red-400 duration-500' value={doctorDetailsInput.specialty} required type="text" />
+                   }} id='specialty' className={`border border-gray-100 shadow-sm pl-2 py-2 rounded-lg outline-none invalid:border-2 ${isSubmissionAttempted ? 'invalid:ring-2 invalid:ring-offset-2 invalid:ring-red-400 invalid:border-red-400' : ''}  duration-500`}  value={doctorDetailsInput.specialty} required type="text" />
                </div>
                
  
@@ -145,14 +146,14 @@ const AddDoctor = ({setShouldAddDoctor,allDoctors,setAllDoctors,setActionStatus}
                      <label className='text-gray-700 font-bold' htmlFor="dateOfBirth">Date of Birth</label>    
                      <input type="date" onChange={(event)=>{
                        setDoctorDetailsInput({...doctorDetailsInput,dateOfBirth:event.target.value})
-                     }} value={doctorDetailsInput.dateOfBirth} className='outline-none border border-gray-100 shadow-sm pl-2 py-2 rounded-lg invalid:border-2 invalid:ring-2 invalid:ring-offset-2 invalid:ring-red-400 invalid:border-red-400 duration-500' required /> 
+                     }} value={doctorDetailsInput.dateOfBirth} className={`border cursor-pointer border-gray-100 shadow-sm pl-2 py-2 rounded-lg outline-none invalid:border-2 ${isSubmissionAttempted ? 'invalid:ring-2 invalid:ring-offset-2 invalid:ring-red-400 invalid:border-red-400' : ''}  duration-500`} required /> 
                  </div>
  
                  <div className='flex flex-col gap-y-4'>
                      <label className='text-gray-700 font-bold' htmlFor="emailAddress">Email Address</label>    
                      <input onChange={(event)=>{
                        setDoctorDetailsInput({...doctorDetailsInput,emailAddress:event.target.value})
-                     }} id='emailAddress' value={doctorDetailsInput.emailAddress} className='outline-none border border-gray-100 shadow-sm pl-2 py-2 rounded-lg invalid:border-2 invalid:ring-2 invalid:ring-offset-2 invalid:ring-red-400 invalid:border-red-400 duration-500' required type="email" />
+                     }} id='emailAddress' value={doctorDetailsInput.emailAddress} className={`border border-gray-100 shadow-sm pl-2 py-2 rounded-lg outline-none invalid:border-2 ${isSubmissionAttempted ? 'invalid:ring-2 invalid:ring-offset-2 invalid:ring-red-400 invalid:border-red-400' : ''}  duration-500`} required type="email" />
                  </div>
                </div>
  
@@ -190,18 +191,22 @@ const AddDoctor = ({setShouldAddDoctor,allDoctors,setAllDoctors,setActionStatus}
                      <label className='text-gray-700 font-bold'>Contact Number</label> 
 
                      <div className='flex items-center gap-x-3 w-full'>
-                      <span>+</span>
-                       <input onChange={(event)=>{
+                         <input onChange={(event)=>{
                          setDoctorDetailsInput({...doctorDetailsInput,countryCode:event.target.value})
-                       }} id='countryCode' value={`${doctorDetailsInput.countryCode}`} className='outline-none border border-gray-100 shadow-sm pl-2 py-2 rounded-md w-10 invalid:border-2 invalid:ring-2 invalid:ring-offset-2 invalid:ring-red-400 invalid:border-red-400 duration-500' required type="tel" maxLength={3}/>
+                       }} id='countryCode' value={`${doctorDetailsInput.countryCode}`} className={`border border-gray-100 shadow-sm pl-2 py-2 rounded-lg outline-none invalid:border-2 ${isSubmissionAttempted ? 'invalid:ring-2 invalid:ring-offset-2 invalid:ring-red-400 invalid:border-red-400' : ''}  duration-500`} required type="tel" maxLength={3}/>
                        <input onChange={(event)=>{
                          setDoctorDetailsInput({...doctorDetailsInput,contactNumber:event.target.value})
-                       }} id='contactNumber' value={doctorDetailsInput.contactNumber} className='outline-none border border-gray-100 shadow-sm pl-2 py-2 rounded-lg w-full invalid:border-2 invalid:ring-2 invalid:ring-offset-2 invalid:ring-red-400 invalid:border-red-400 duration-500' required type="tel" maxLength={12} />
+                       }} id='contactNumber' value={doctorDetailsInput.contactNumber} className={`border border-gray-100 w-full shadow-sm pl-2 py-2 rounded-lg outline-none invalid:border-2 ${isSubmissionAttempted ? 'invalid:ring-2 invalid:ring-offset-2 invalid:ring-red-400 invalid:border-red-400' : ''}  duration-500`} required type="tel" maxLength={12} />
                      </div>   
                  </div>
                </div>
  
-               <button type='submit' className='flex w-full justify-end text-gray-700 font-bold text-xs self-end cursor-pointer hover:opacity-50 duration-500 sticky bottom-0 right-0 py-4  bg-white'>Add Doctor</button>
+               <button onClick={()=>{
+                if(!isSubmissionAttempted){
+                console.log('setting IsSubmissionAttempted to true');
+                setIsSubmissionAttempted(true);
+                }
+               }}  type='submit' className='flex w-full justify-end text-gray-700 font-bold text-xs self-end cursor-pointer hover:opacity-50 duration-500 sticky bottom-0 right-0 py-4  bg-white'>Add Doctor</button>
              </form>
          </div>
      </div>

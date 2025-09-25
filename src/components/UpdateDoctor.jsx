@@ -83,7 +83,7 @@ const UpdateDoctor = ({doctor,setCurrentDoctor,setShouldUpdateDoctor,setActionSt
     <div className='flex flex-col gap-y-14 items-start bg-white px-1  rounded-lg text-sm h-full max-w-full font-bold overflow-y-auto hide-scrollbar'>
 
         
-        <div className='flex sticky top-0 w-full justify-center pt-1'>
+        <div className='flex sticky top-0 w-full justify-center pt-1 bg-white pb-2 '>
         <button onClick={()=>{
         setShouldUpdateDoctor(false);
         }} className='absolute left-0 hover:bg-gray-50 duration-500 h-5 w-5 rounded-full flex items-center justify-center cursor-pointer '>
@@ -93,10 +93,25 @@ const UpdateDoctor = ({doctor,setCurrentDoctor,setShouldUpdateDoctor,setActionSt
         </button>
         <h1 className='pt-2'>Update Doctor</h1>
         </div>
+
+
         
-        <img src={imagePreview} onClick={() => {
-        imageInputRef.current.click();
-        }} className='rounded-full h-30 w-30 object-cover self-center hover:opacity-50 duration-500 cursor-pointer' alt="" />
+        {  imagePreview ?
+                <div className='h-32 w-32 self-center'>
+                  <img onClick={()=>{
+                imageInputRef.current.click();
+                }} className='rounded-full h-full w-full object-cover hover:opacity-50 duration-500 cursor-pointer' src={imagePreview} alt="" />
+                </div>
+                :
+                <span onClick={()=>{
+                  imageInputRef.current.click();
+                }} className='self-center p-2  flex items-center justify-center h-30 w-30 bg-gray-300 rounded-full hover:opacity-50 duration-500 cursor-pointer'>
+                <svg className='bi bi-person-fill fill-gray-200 ' xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16">
+                <path d="M3 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6"/>
+                </svg>
+                </span>
+                
+        }
         
            
         <input onChange={async (image) => {

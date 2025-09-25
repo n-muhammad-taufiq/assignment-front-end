@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+ import React, { useEffect, useState } from 'react'
 import DoctorsList from './DoctorsList'
 
 const DoctorsOverview = () => {
@@ -8,6 +8,7 @@ const DoctorsOverview = () => {
     const [search,setSearch]=useState(null);
     const [shouldShowSpecialityOptions,setShouldShowSpecialityOptions]=useState(false);
     const [filter,setFilter]=useState({specialty:null,timePeriod:null})
+    const [isSearchTriggered,setIsSearchTriggered]=useState(false);
 
     useEffect(()=>{
         const fetchDoctors=async()=>{
@@ -40,12 +41,12 @@ const DoctorsOverview = () => {
 
     useEffect(()=>{
         const handleSearch=()=>{
-            if(search===''){
+        if(search!=null){
             setDoctors(allDoctors);
         }
         else{
             let newDoctors=[];
-            allDoctors.forEach((doctor)=>{
+            allDoctors?.forEach((doctor)=>{
                 for(const [key,value] of Object.entries(doctor)){
                     console.log('doctor',doctor);
                     if(key==='dateOfBirth'){
@@ -128,8 +129,11 @@ const DoctorsOverview = () => {
         <svg className='bi bi-search fill-gray-500' xmlns="http://www.w3.org/2000/svg" width="12" height="12" fill="currentColor" viewBox="0 0 16 16">
         <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001q.044.06.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1 1 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0"/>
         </svg>
-        <input value={search} onChange={(event)=>{
+        <input value={search ? search : ""} onChange={(event)=>{
             setSearch(event.target.value);
+            if(!isSearchTriggered){
+                setIsSearchTriggered(true);
+            }
         }} className='text-xs text-gray-950 font-bold outline-none relative' type="text" placeholder='Search...' />
         </div>
         <div className='relative bg-white'>

@@ -3,13 +3,13 @@ import UpdateDoctor from './UpdateDoctor';
 import {createPortal} from 'react-dom'
 import Loading from './Loading';
 
-const Doctor = ({index,doctor,shouldSelectAllDoctors,selectedDoctors,setSelectedDoctors,setActionStatus,handleDeleteDoctor}) => {
+const Doctor = ({index,doctor,shouldSelectAllDoctors,selectedDoctors,setSelectedDoctors,setActionStatus,handleDeleteDoctor,shouldShowActionMenu,setShouldShowActionMenu}) => {
     const [currentDoctor,setCurrentDoctor]=useState(doctor);
     const [isSelected,setIsSelected]=useState(false);
     const [shouldShowOptions,setShouldShowOptions]=useState(false);
     const [shouldUpdateDoctor,setShouldUpdateDoctor]=useState(false);
 
-
+    
     useEffect(()=>{
         if(shouldSelectAllDoctors & !isSelected){
             setIsSelected(true);
@@ -84,21 +84,26 @@ const Doctor = ({index,doctor,shouldSelectAllDoctors,selectedDoctors,setSelected
         <td className='p-3'>
             <div className='relative flex items-center'>
             <button onClick={()=>{
-                setShouldShowOptions(!shouldShowOptions);
+                if(shouldShowActionMenu.doctorId===doctor.id){
+                    setShouldShowActionMenu({doctorId:null});
+                }
+                else{
+                    setShouldShowActionMenu({doctorId:doctor.id});
+                }
             }} className='cursor-pointer hover:opacity-50 duration-500'>
             <svg className='bi bi-three-dots fill-black' xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
             <path d="M3 9.5a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3m5 0a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3m5 0a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3"/>
             </svg>
             </button>
-            {shouldShowOptions &&
+            {shouldShowActionMenu.doctorId===doctor.id &&
             <div className='absolute top-0 right-0 -bottom-20 h-fit flex flex-col items-start gap-y-2 border border-gray-200 fade-in bg-white rounded-lg p-3 text-xs text-gray-800'>
                 <button className='cursor-pointer hover:opacity-50 duration-500' onClick={()=>{
                     setShouldUpdateDoctor(true);
-                    setShouldShowOptions(false);
+                    setShouldShowActionMenu({doctorId:null});
                 }}>Update</button>
                 <button className='cursor-pointer hover:opacity-50 duration-500' onClick={()=>{
                     handleDeleteDoctor(currentDoctor);
-                    setShouldShowOptions(false);
+                    setShouldShowActionMenu({doctorId:null});
                 }}>Delete</button>
             </div>
             }

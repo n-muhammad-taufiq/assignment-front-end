@@ -3,7 +3,7 @@ import React from 'react'
 const Sidebar = () => {
 
   return (
-    <div className='flex flex-col fixed left-0 top-0 bottom-0 border-r border-r-gray-100 pt-5 gap-y-7 pl-4 '>
+    <div className='flex flex-col border-r border-r-gray-100 pt-5 gap-y-7 pl-4 '>
       <div className='flex flex-col gap-y-5 '>
             <div className='flex gap-x-1 items-center'>
               <img className='h-7 w-fit' src="./src/assets/icons/logo.png" alt="" />

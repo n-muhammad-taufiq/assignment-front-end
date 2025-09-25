@@ -70,7 +70,7 @@ const DoctorsList = ({allDoctors,doctors,setAllDoctors}) => {
 
   return (
     <>
-    <div className='flex self-end items-end pr-5 gap-x-5 '>
+    <div className='flex self-end items-center pr-5 gap-x-5 '>
      {selectedDoctors.length>0 
     &&
     <button onClick={()=>{
@@ -85,7 +85,7 @@ const DoctorsList = ({allDoctors,doctors,setAllDoctors}) => {
     }
     <button onClick={()=>{
         setShouldAddDoctor(true);
-    }} disabled={selectedDoctors.length>0} className='disabled:text-gray-300 cursor-pointer hover:opacity-50 duration-500 text-gray-800 font-bold text-xs border border-gray-500  px-4 py-2 rounded-md'>Add Doctor</button>
+    }} disabled={selectedDoctors.length>0} className='disabled:text-gray-300 disabled:cursor-default cursor-pointer not-disabled:hover:opacity-50 not-disabled:duration-500 text-gray-800 font-bold text-xs border border-gray-500  px-4 py-2 rounded-md'>Add Doctor</button>
 
     </div>
     

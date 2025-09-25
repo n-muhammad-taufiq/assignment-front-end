@@ -82,7 +82,7 @@ const Doctor = ({index,doctor,shouldSelectAllDoctors,selectedDoctors,setSelected
         <td className='p-3'>{currentDoctor.status}</td>
         <td className='p-3'>+{currentDoctor.countryCode} {currentDoctor.contactNumber}</td>
         <td className='p-3'>
-            <div className='relative flex items-center'>
+            <div className='relative flex gap-x-1 w-20 h-5 '>
             <button onClick={()=>{
                 if(shouldShowActionMenu.doctorId===doctor.id){
                     setShouldShowActionMenu({doctorId:null});
@@ -96,7 +96,7 @@ const Doctor = ({index,doctor,shouldSelectAllDoctors,selectedDoctors,setSelected
             </svg>
             </button>
             {shouldShowActionMenu.doctorId===doctor.id &&
-            <div className='absolute top-0 right-0 -bottom-20 h-fit flex flex-col items-start gap-y-2 border border-gray-200 fade-in bg-white rounded-lg p-3 text-xs text-gray-800'>
+            <div className='h-fit flex flex-col items-start gap-y-2 border border-gray-200 fade-in bg-white rounded-lg p-3 text-xs text-gray-800'>
                 <button className='cursor-pointer hover:opacity-50 duration-500' onClick={()=>{
                     setShouldUpdateDoctor(true);
                     setShouldShowActionMenu({doctorId:null});

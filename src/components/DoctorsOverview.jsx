@@ -60,12 +60,21 @@ const DoctorsOverview = () => {
                        const format3=`${year}-${month}-${day}`;
 
 
-                        if(format1.includes(search.toLowerCase())|| format2.includes(search.toLowerCase()) || format3.includes(search.toLowerCase())){
-                            newDoctors.push(doctor);
-                        }
+                    if(format1.includes(search.toLowerCase())|| format2.includes(search.toLowerCase()) || format3.includes(search.toLowerCase())){
+                            if((filter.specialty && filter.specialty===doctor.specialty) || !filter.specialty){
+                                console.log('filter specialty ',filter.specialty);
+                                console.log('doctor specialty ',doctor.specialty);
+
+                                newDoctors.push(doctor);  
+                            }
+                    }
                     } 
                     else if(String(value).toLowerCase()===(search.toLowerCase())){
-                        newDoctors.push(doctor);
+                        if((filter.specialty && filter.specialty===doctor.specialty) || !filter.specialty){
+                                 console.log('filter specialty ',filter.specialty);
+                                console.log('doctor specialty ',doctor.specialty);
+                                newDoctors.push(doctor);  
+                        }
                     }
                 }
             });

@@ -130,11 +130,11 @@ const DoctorsOverview = () => {
 
     if(allDoctors && doctors){
         return (
-        <div className='flex flex-col gap-y-3 bg-white rounded-lg w-full pb-10'>
-        <div className='flex w-full justify-between items-center p-4 '>
-        <h1 className='font-bold'>Doctors Overview</h1>
-        <div className='flex gap-x-4 items-center '>
-        <div className='flex items-center gap-x-4 bg-gray-100 p-3 rounded-md'>
+        <div className='flex flex-col gap-y-2  bg-white rounded-lg w-full max-w-full pb-10'>
+        <div className='flex max-w-full max-lg:flex-col max-lg:items-start max-lg:gap-y-3 w-full justify-between items-center p-3 '>
+        <h1 className='font-bold max-lg:text-sm max-md:text-xs'>Doctors Overview</h1>
+        <div className='flex max-lg:flex-col max-lg:items-start max-lg:gap-y-2 max-w-full gap-x-4 items-center '>
+        <div className='flex max-w-full items-center gap-x-4 bg-gray-100 p-3 rounded-md'>
         <svg className='bi bi-search fill-gray-500' xmlns="http://www.w3.org/2000/svg" width="12" height="12" fill="currentColor" viewBox="0 0 16 16">
         <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001q.044.06.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1 1 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0"/>
         </svg>
@@ -143,7 +143,7 @@ const DoctorsOverview = () => {
             if(!isSearchTriggered){
                 setIsSearchTriggered(true);
             }
-        }} className='text-xs text-gray-950 font-bold outline-none relative' type="text" placeholder='Search...' />
+        }} className='max-w-full text-xs text-gray-950 font-bold outline-none relative' type="text" placeholder='Search...' />
         </div>
         <div className='relative bg-white'>
             <button onClick={()=>{

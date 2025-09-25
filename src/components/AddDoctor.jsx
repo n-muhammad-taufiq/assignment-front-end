@@ -78,10 +78,10 @@ const AddDoctor = ({setShouldAddDoctor,allDoctors,setAllDoctors,setActionStatus}
  
    return (
     <>
-     <div className='fixed top-0 left-0 right-0 bottom-0 bg-black/90 flex items-center justify-center py-3'>
+     <div className='fixed z-30 top-0 left-0 right-0 bottom-0 bg-black/90 flex items-center justify-center py-3 p-3'>
          <div className='flex flex-col gap-y-14 items-start bg-white px-1 rounded-lg text-sm h-full max-w-full font-bold overflow-y-auto hide-scrollbar'>
  
-              <div className='bg-white z-20 pb-2 flex sticky top-0 w-full justify-center pt-1'>
+              <div className='bg-white z-20 pb-2 flex sticky top-0 w-full  max-w-full justify-center pt-1'>
               <button onClick={()=>{
                 setShouldAddDoctor(false);
               }} className='absolute left-0 hover:bg-gray-50 duration-500 h-5 w-5 rounded-full flex items-center justify-center cursor-pointer '>
@@ -95,7 +95,7 @@ const AddDoctor = ({setShouldAddDoctor,allDoctors,setAllDoctors,setActionStatus}
               </div>
              
              {  imagePreview ?
-                <div className='h-32 w-32 self-center'>
+                <div className='h-32 w-32 self-center  max-w-full'>
                   <img onClick={()=>{
                 imageInputRef.current.click();
                 }} className='rounded-full h-full w-full object-cover hover:opacity-50 duration-500 cursor-pointer' src={imagePreview} alt="" />
@@ -104,7 +104,7 @@ const AddDoctor = ({setShouldAddDoctor,allDoctors,setAllDoctors,setActionStatus}
                 <span onClick={()=>{
                   imageInputRef.current.click();
                 }} className='self-center p-2  flex items-center justify-center h-30 w-30 bg-gray-300 rounded-full hover:opacity-50 duration-500 cursor-pointer'>
-                <svg className='bi bi-person-fill fill-gray-200 ' xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16">
+                <svg className='bi bi-person-fill fill-gray-200  max-w-full ' xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16">
                 <path d="M3 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6"/>
                 </svg>
                 </span>
@@ -119,56 +119,54 @@ const AddDoctor = ({setShouldAddDoctor,allDoctors,setAllDoctors,setActionStatus}
                setProfilePhoto(image.target.files[0]);
              }} ref={imageInputRef} className='hidden' type="file" accept='image/*' />
  
-             <p className='self-center'>Profile Picture</p>
+             <p className='self-center '>Profile Picture</p>
  
  
              <form ref={formRef} onSubmit={(event)=>{
                   handleSubmit(event)
-             }} className='flex flex-col gap-y-5 px-8'>
+             }} className='flex flex-col gap-y-5 px-8  max-w-full'>
  
-               <div className='flex flex-col gap-y-4'>
+               <div className='flex flex-col  max-w-full gap-y-4'>
                    <label className='text-gray-700 font-bold' htmlFor="name">Name</label>
                    <input onChange={(event)=>{
                      setDoctorDetailsInput({...doctorDetailsInput,name:event.target.value})
-                   }} id='name' className={`border border-gray-100 shadow-sm pl-2 py-2 rounded-lg outline-none invalid:border-2 ${isSubmissionAttempted ? 'invalid:ring-2 invalid:ring-offset-2 invalid:ring-red-400 invalid:border-red-400' : ''}  duration-500`} value={doctorDetailsInput.name} required type="text" />
+                   }} id='name' className={`border border-gray-100  max-w-full shadow-sm pl-2 py-2 rounded-lg outline-none invalid:border-2 ${isSubmissionAttempted ? 'invalid:ring-2 invalid:ring-offset-2 invalid:ring-red-400 invalid:border-red-400' : ''}  duration-500`} value={doctorDetailsInput.name} required type="text" />
                </div>
  
-               <div className='flex flex-col gap-y-4'>
+               <div className='flex flex-col   max-w-fullmax-w-full gap-y-4'>
                    <label className='text-gray-700 font-bold' htmlFor="specialty">Specialty</label>
                    <input onChange={(event)=>{
                      setDoctorDetailsInput({...doctorDetailsInput,specialty:event.target.value})
-                   }} id='specialty' className={`border border-gray-100 shadow-sm pl-2 py-2 rounded-lg outline-none invalid:border-2 ${isSubmissionAttempted ? 'invalid:ring-2 invalid:ring-offset-2 invalid:ring-red-400 invalid:border-red-400' : ''}  duration-500`}  value={doctorDetailsInput.specialty} required type="text" />
+                   }} id='specialty' className={`border border-gray-100  max-w-full shadow-sm pl-2 py-2 rounded-lg outline-none invalid:border-2 ${isSubmissionAttempted ? 'invalid:ring-2 invalid:ring-offset-2 invalid:ring-red-400 invalid:border-red-400' : ''}  duration-500`}  value={doctorDetailsInput.specialty} required type="text" />
                </div>
                
  
-               <div className='flex gap-x-5'>
-                 <div className='flex flex-col gap-y-4'> 
+                 <div className='flex flex-col gap-y-4  max-w-full'> 
                      <label className='text-gray-700 font-bold' htmlFor="dateOfBirth">Date of Birth</label>    
                      <input type="date" onChange={(event)=>{
                        setDoctorDetailsInput({...doctorDetailsInput,dateOfBirth:event.target.value})
-                     }} value={doctorDetailsInput.dateOfBirth} className={`border cursor-pointer border-gray-100 shadow-sm pl-2 py-2 rounded-lg outline-none invalid:border-2 ${isSubmissionAttempted ? 'invalid:ring-2 invalid:ring-offset-2 invalid:ring-red-400 invalid:border-red-400' : ''}  duration-500`} required /> 
+                     }} value={doctorDetailsInput.dateOfBirth} className={`border  max-w-full cursor-pointer border-gray-100 shadow-sm pl-2 py-2 rounded-lg outline-none invalid:border-2 ${isSubmissionAttempted ? 'invalid:ring-2 invalid:ring-offset-2 invalid:ring-red-400 invalid:border-red-400' : ''}  duration-500`} required /> 
                  </div>
  
-                 <div className='flex flex-col gap-y-4'>
+                 <div className='flex flex-col gap-y-4  max-w-full'>
                      <label className='text-gray-700 font-bold' htmlFor="emailAddress">Email Address</label>    
                      <input onChange={(event)=>{
                        setDoctorDetailsInput({...doctorDetailsInput,emailAddress:event.target.value})
-                     }} id='emailAddress' value={doctorDetailsInput.emailAddress} className={`border border-gray-100 shadow-sm pl-2 py-2 rounded-lg outline-none invalid:border-2 ${isSubmissionAttempted ? 'invalid:ring-2 invalid:ring-offset-2 invalid:ring-red-400 invalid:border-red-400' : ''}  duration-500`} required type="email" />
+                     }} id='emailAddress' value={doctorDetailsInput.emailAddress} className={`border border-gray-100  max-w-full shadow-sm pl-2 py-2 rounded-lg outline-none invalid:border-2 ${isSubmissionAttempted ? 'invalid:ring-2 invalid:ring-offset-2 invalid:ring-red-400 invalid:border-red-400' : ''}  duration-500`} required type="email" />
                  </div>
-               </div>
  
-               <div className='flex flex-col gap-y-4 w-full'>
+               <div className='flex flex-col gap-y-4 w-full  max-w-full'>
                <label className='text-gray-700 font-bold' htmlFor="status">Status</label>    
                <div onClick={()=>{
                  setShouldShowStatusOptions(!shouldShowStatusOptions);
-               }} className='relative flex justify-between items-center w-full border border-gray-50 rounded-lg shadow-sm px-2 py-2 cursor-pointer '>
+               }} className='relative  max-w-full flex justify-between items-center w-full border border-gray-50 rounded-lg shadow-sm px-2 py-2 cursor-pointer '>
                      <p>{doctorDetailsInput.status[0].toUpperCase()+doctorDetailsInput.status.slice(1)}</p>
                      <svg className='bi bi-chevron-down fill-gray-500 mt-1 ' xmlns="http://www.w3.org/2000/svg" width="12" height="12" fill="currentColor" viewBox="0 0 16 16">
                      <path fill-rule="evenodd" d="M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708"/>
                      </svg>
                      {
                        shouldShowStatusOptions &&
-                       <div className='absolute -bottom-15 left-0 right-0 border-2 border-gray-100 flex flex-col  gap-y-2 bg-white text-xs z-20 rounded-sm px-4 py-2'>
+                       <div className='absolute -bottom-15 left-0  max-w-full right-0 border-2 border-gray-100 flex flex-col  gap-y-2 bg-white text-xs z-20 rounded-sm px-4 py-2'>
                        <button onClick={(event)=>{
                          event.preventDefault();
                          setDoctorDetailsInput({...doctorDetailsInput,status:'active'});
@@ -186,14 +184,14 @@ const AddDoctor = ({setShouldAddDoctor,allDoctors,setAllDoctors,setActionStatus}
                </div>
                      
  
-               <div className='flex gap-x-5 w-full'>
-                 <div className='flex flex-col w-full gap-y-4'>
-                     <label className='text-gray-700 font-bold'>Contact Number</label> 
-
-                     <div className='flex items-center gap-x-3 w-full'>
+               <div className='flex gap-x-5 w-full  max-w-full'>
+                 <div className='flex flex-col w-full gap-y-4  max-w-full'>
+                     <label className='text-gray-700 font-bold max-w-full'>Contact Number</label> 
+                     <div className='flex items-center gap-x-3 w-full max-w-full'>
+                        <span className='text-gray-800'>+</span>
                          <input onChange={(event)=>{
                          setDoctorDetailsInput({...doctorDetailsInput,countryCode:event.target.value})
-                       }} id='countryCode' value={`${doctorDetailsInput.countryCode}`} className={`border border-gray-100 shadow-sm pl-2 py-2 rounded-lg outline-none invalid:border-2 ${isSubmissionAttempted ? 'invalid:ring-2 invalid:ring-offset-2 invalid:ring-red-400 invalid:border-red-400' : ''}  duration-500`} required type="tel" maxLength={3}/>
+                       }} id='countryCode' value={`${doctorDetailsInput.countryCode}`} className={`border border-gray-100 w-12 shadow-sm pl-2 py-2 rounded-lg outline-none invalid:border-2 ${isSubmissionAttempted ? 'invalid:ring-2 invalid:ring-offset-2 invalid:ring-red-400 invalid:border-red-400' : ''}  duration-500`} required type="tel" maxLength={3}/>
                        <input onChange={(event)=>{
                          setDoctorDetailsInput({...doctorDetailsInput,contactNumber:event.target.value})
                        }} id='contactNumber' value={doctorDetailsInput.contactNumber} className={`border border-gray-100 w-full shadow-sm pl-2 py-2 rounded-lg outline-none invalid:border-2 ${isSubmissionAttempted ? 'invalid:ring-2 invalid:ring-offset-2 invalid:ring-red-400 invalid:border-red-400' : ''}  duration-500`} required type="tel" maxLength={12} />
@@ -206,7 +204,7 @@ const AddDoctor = ({setShouldAddDoctor,allDoctors,setAllDoctors,setActionStatus}
                 console.log('setting IsSubmissionAttempted to true');
                 setIsSubmissionAttempted(true);
                 }
-               }}  type='submit' className='flex w-full justify-end text-gray-700 font-bold text-xs self-end cursor-pointer hover:opacity-50 duration-500 sticky bottom-0 right-0 py-4  bg-white'>Add Doctor</button>
+               }}  type='submit' className='flex w-full  max-w-full justify-end text-gray-700 font-bold text-xs self-end cursor-pointer hover:opacity-50 duration-500 sticky bottom-0 right-0 py-4  bg-white'>Add Doctor</button>
              </form>
          </div>
      </div>

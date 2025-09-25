@@ -6,15 +6,15 @@ import DoctorsOverview from './DoctorsOverview'
 
 const Dashboard = () => {
   return (
-    <div className='flex flex-col gap-y-5 p-5 w-full h-full'>
-        <h1 className='text-lg font-bold'>Dashboard <span className='text-slate-300'>/ Analytics and Reports</span></h1>
-        <div className='flex gap-x-4'>
+    <div className='flex flex-col gap-y-5 p-5  w-full h-full'>
+        <h1 className='text-lg max-lg:text-sm max-sm:text-xs font-bold'>Dashboard <span className='text-slate-300'>/ Analytics and Reports</span></h1>
+        <div className='grid grid-cols-[repeat(auto-fill,minmax(200px,1fr))] max-w-full md:justify-around w-full max-md:justify-items-start gap-3'>
         <StatisticCard title={'Total Visitors'} previousValue={100} currentValue={136} total={42946}></StatisticCard>
         <StatisticCard title={'Paid Visitors'} previousValue={100} currentValue={126} total={7929}></StatisticCard>
         <StatisticCard title={'Total Appointments'} previousValue={100} currentValue={126} total={4199}></StatisticCard>
         <StatisticCard title={'New Patients'} previousValue={100} currentValue={126} total={1647}></StatisticCard>
         </div>
-        <div className='grid grid-cols-[2fr_1fr] gap-x-5'>
+        <div className='grid grid-cols-[2fr_1fr] max-md:grid-cols-1 max-md:gap-y-3 gap-x-5 '>
         <Cashflow data={{
           graphData:[
           {date:new Date('2025-01-01').getTime(),Income:250000},

@@ -7,6 +7,7 @@ const Sidebar = () => {
   return (
     <>
     <div className='flex flex-col h-screen border-r-2 border-r-gray-200 bg-slate-50 pt-5  pr-3 gap-y-7 pl-4 max-lg:hidden w-fit '>
+
       <div className='flex flex-col gap-y-5 '>
             <div className='flex gap-x-1 items-center'>
               <img className='h-7 w-fit' src="./src/assets/icons/tectra_technologies_logo.png" alt="" />

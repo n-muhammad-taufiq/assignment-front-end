@@ -1,9 +1,10 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import { useState,useEffect,useRef} from 'react';
 import Loading from './Loading';
+import { AuthContext } from '../../context/AuthProvider';
 
 const AddDoctor = ({setShouldAddDoctor,allDoctors,setAllDoctors,setActionStatus}) => {
-     const [doctorDetailsInput,setDoctorDetailsInput]=useState({name:"",specialty:"",dateOfBirth:"",emailAddress:"",status:"active",countryCode:"+91",contactNumber:"",profilePhoto:"",userId:1});
+     const [doctorDetailsInput,setDoctorDetailsInput]=useState({name:"",specialty:"",dateOfBirth:"",emailAddress:"",status:"active",countryCode:"+91",contactNumber:"",profilePhoto:""});
      const [shouldShowStatusOptions,setShouldShowStatusOptions]=useState(false);
      const [imagePreview,setImagePreview]=useState(null);
      const imageInputRef=useRef(null);
@@ -11,13 +12,14 @@ const AddDoctor = ({setShouldAddDoctor,allDoctors,setAllDoctors,setActionStatus}
      const [profilePhoto,setProfilePhoto]=useState(null);
      const [isLoading,setIsLoading]=useState(false);
      const [isSubmissionAttempted,setIsSubmissionAttempted]=useState(false);
+     const {userData,fetchWithAuth}=useContext(AuthContext);
 
-     const handleSubmit=(event)=>{
+     const handleSubmit=async (event)=>{
         event.preventDefault();
         setIsLoading(true);
         const form=formRef.current;
         if(form.checkValidity()){
-          handleAddDoctor();
+          await handleAddDoctor();
         }
         else{
           form.reportValidity();
@@ -26,20 +28,24 @@ const AddDoctor = ({setShouldAddDoctor,allDoctors,setAllDoctors,setActionStatus}
  
      const handleAddDoctor=async()=>{
        const data=doctorDetailsInput;
+       data.userId=userData.id;
        if(profilePhoto){
          const imageUrl=await handleUploadImage();
          data.profilePhoto=imageUrl;
-       }
+       }  
        console.log(data);
        
        try {
-         const responseObj=await fetch('http://localhost:3000/doctors',{
-           headers:{
-               "Content-Type":"application/json"
+        const options={
+          headers:{
+                'Content-Type':"application/json",
            },
+           credentials:'include',
            method:'POST',
            body:JSON.stringify(data)
-         });
+         }
+         const url='http://localhost:3000/doctors'
+         const responseObj=await fetchWithAuth(url,options)
          const response=await responseObj.json();
          console.log('response for insert query:',response)
          if(responseObj.ok){
@@ -48,11 +54,9 @@ const AddDoctor = ({setShouldAddDoctor,allDoctors,setAllDoctors,setActionStatus}
           setIsLoading(false);
           setShouldAddDoctor(false);
          }
-
        } catch (error) {
          console.log(error);
        }
-
      }  
  
      const handleUploadImage=async ()=>{

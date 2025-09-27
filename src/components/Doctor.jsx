@@ -43,6 +43,10 @@ const Doctor = ({index,doctor,shouldSelectAllDoctors,selectedDoctors,setSelected
         )
     }
 
+    useEffect(()=>{
+        console.log(shouldShowActionMenu);
+    })
+
   return (
     <>
     

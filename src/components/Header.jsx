@@ -1,7 +1,10 @@
-import React, { useEffect, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
+import { AuthContext } from '../../context/AuthProvider';
 
 const Header = () => {
   const [shouldOpenMenu,setShouldOpenMenu]=useState(false);
+  const {userData}=useContext(AuthContext);
+
 
   useEffect(()=>{
     if(shouldOpenMenu){
@@ -13,10 +16,12 @@ const Header = () => {
     }
   },[shouldOpenMenu])
 
+  if(userData){
+
   return (
     <>
     <div className='flex sticky top-0 z-20 w-full items-center bg-slate-50 px-8 max-lg:px-2 py-4 justify-between gap-x-3 border-b-2 border-b-gray-200'>
-         {
+      {
       !shouldOpenMenu &&
       <div className='lg:hidden'>
       <button className='' onClick={()=>{
@@ -40,8 +45,8 @@ const Header = () => {
         <input className='text-xs outline-none w-full text-gray-900 font-bold ' type="text" placeholder='Search...' />
         </div>
 
-        <div className='flex gap-x-3'>
-          <div className='flex gap-x-1'>
+        <div className='flex gap-x-3 items-center '>
+          <div className='flex gap-x-2 items-center'>
               <button className='flex items-center justify-center h-7 w-7 rounded-full border border-gray-200 cursor-pointer hover:opacity-50 duration-500 '>
               <svg className='bi bi-bell fill-gray-800 h-3 w-3' xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 16 16">
               <path d="M8 16a2 2 0 0 0 2-2H6a2 2 0 0 0 2 2M8 1.918l-.797.161A4 4 0 0 0 4 6c0 .628-.134 2.197-.459 3.742-.16.767-.376 1.566-.663 2.258h10.244c-.287-.692-.502-1.49-.663-2.258C12.134 8.197 12 6.628 12 6a4 4 0 0 0-3.203-3.92zM14.22 12c.223.447.481.801.78 1H1c.299-.199.557-.553.78-1C2.68 10.2 3 6.88 3 6c0-2.42 1.72-4.44 4.005-4.901a1 1 0 1 1 1.99 0A5 5 0 0 1 13 6c0 .88.32 4.2 1.22 6"/>
@@ -61,7 +66,25 @@ const Header = () => {
               <path fill-rule="evenodd" d="M15.854 8.354a.5.5 0 0 0 0-.708l-3-3a.5.5 0 0 0-.708.708L14.293 7.5H5.5a.5.5 0 0 0 0 1h8.793l-2.147 2.146a.5.5 0 0 0 .708.708z"/>
               </svg>
               </button>
+
+              <span className='h-10 bg-gray-200 w-[1px]'>
+              </span>
+
+              <div className='flex gap-x-1 items-center'>
+              <div className='h-9 w-9 flex items-center justify-center'>
+                <img className='max-h-full max-w-full object-cover' src={userData.profile_pic} alt="" />
+              </div>
+              <div className='flex flex-col items-start'>
+              <p className='text-[0.6rem] font-bold'>{userData.user_name}</p>
+              <div className='flex gap-x-1   items-center'>
+                <p className='text-[0.5rem]'>{userData.status[0].toUpperCase()+userData.status.slice(1)}</p>
+                <span className={`${userData.status ? 'bg-green-400' : 'bg-red-500'} h-1 w-1 rounded-full`}></span>
+
+              </div>
+              </div>
+              </div>
           </div> 
+          
         </div>
     </div>
 
@@ -129,6 +152,7 @@ const Header = () => {
     }
     </>
   )
+}
 }
 
 export default Header

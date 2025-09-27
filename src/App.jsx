@@ -2,6 +2,7 @@ import ProtectedLayout from "./components/ProtectedLayout"
 import Sidebar from "./components/Sidebar"
 import { Routes,Route } from "react-router-dom"
 import Dashboard from "./components/Dashboard"
+import ProtectedRoute from "./components/ProtectedRoute"
 
 
 function App() {
@@ -9,7 +10,7 @@ function App() {
   return (
    <Routes>
     <Route path="/" element={<ProtectedLayout></ProtectedLayout>}>
-    <Route path="" element={<Dashboard></Dashboard>}></Route>
+    <Route path="" element={<ProtectedRoute><Dashboard></Dashboard></ProtectedRoute>}></Route>
     </Route>
    </Routes>
   )

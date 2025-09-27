@@ -1,9 +1,10 @@
-import React, { useEffect, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import Doctor from './Doctor'
 import ListColumn from './ListColumn'
 import UpdateDoctor from './UpdateDoctor'
 import AddDoctor from './AddDoctor'
 import ActionStatus from './ActionStatus'
+import { AuthContext } from '../../context/AuthProvider'
 
 const DoctorsList = ({allDoctors,doctors,setAllDoctors}) => {
     const [shouldSelectAllDoctors,setShouldSelectAllDoctors]=useState(false);
@@ -12,6 +13,7 @@ const DoctorsList = ({allDoctors,doctors,setAllDoctors}) => {
     const [actionStatus,setActionStatus]=useState('');
     const [isLoading,setIsLoading]=useState(false);
     const [shouldShowActionMenu,setShouldShowActionMenu]=useState({doctorId:null});
+    const {fetchWithAuth}=useContext(AuthContext);
 
     useEffect(()=>{
         console.log(selectedDoctors);
@@ -26,11 +28,13 @@ const DoctorsList = ({allDoctors,doctors,setAllDoctors}) => {
     const handleDeleteDoctor=async (doctor)=>{
         console.log('handleDelete function');
         const deletedDoctor=doctor;
-        try{
-            await fetch(`http://localhost:3000/doctors/${deletedDoctor.id}`,{
+        const options={
+                credentials:'include',
                 method:'DELETE'
-            });
-
+        }
+        const url=`http://localhost:3000/doctors/${deletedDoctor.id}`;
+        try{
+            await fetchWithAuth(url,options);
             const newDoctors=doctors.filter(doctor=>doctor.id!=deletedDoctor.id);
             console.log('deleted doctor: ',deletedDoctor);
             console.log('newDoctors: ',newDoctors);
@@ -45,15 +49,19 @@ const DoctorsList = ({allDoctors,doctors,setAllDoctors}) => {
         const data=selectedDoctors.map(doctor=>doctor.id);
         console.log('data for multiple deleton',data);
          try{
-            await fetch(`http://localhost:3000/doctors/deleteDoctors`,{
-                headers:{
-                    'Content-Type':'application/json'
+            const options={
+                 headers:{
+                    'Content-Type':'application/json',
                 },
+                credentials:'include',
                 method:'POST',
                 body:JSON.stringify({
                     data:data
-                })
-            });
+                }
+                )
+            }
+            const url='http://localhost:3000/doctors/deleteDoctors';
+            await fetchWithAuth(url,options);
             let newDoctors=[];
             allDoctors.forEach((doctor)=>{
                 if(!data.includes(doctor.id)){

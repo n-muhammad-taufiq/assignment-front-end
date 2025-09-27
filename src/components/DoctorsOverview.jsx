@@ -1,5 +1,6 @@
- import React, { useEffect, useState } from 'react'
+ import React, { useContext, useEffect, useState } from 'react'
 import DoctorsList from './DoctorsList'
+import { AuthContext } from '../../context/AuthProvider';
 
 const DoctorsOverview = () => {
 
@@ -9,11 +10,16 @@ const DoctorsOverview = () => {
     const [shouldShowSpecialityOptions,setShouldShowSpecialityOptions]=useState(false);
     const [filter,setFilter]=useState({specialty:null,timePeriod:null})
     const [isSearchTriggered,setIsSearchTriggered]=useState(false);
+    const {userData,fetchWithAuth}=useContext(AuthContext);
 
     useEffect(()=>{
         const fetchDoctors=async()=>{
             try{
-                const responseObj=await fetch('http://localhost:3000/doctors/1');
+                const options={
+                    credentials:'include'
+                };
+                const url=`http://localhost:3000/doctors/${userData.id}`;
+                const responseObj=await fetchWithAuth(url,options);
                 if(responseObj.ok){
                     const response=await responseObj.json();
                     console.log(response);
@@ -25,10 +31,10 @@ const DoctorsOverview = () => {
                 console.log(error);
             }
         }
-        if(!allDoctors){
+        if(!allDoctors && userData){
             fetchDoctors();
         }
-    },[allDoctors])
+    },[allDoctors,userData])
 
     useEffect(()=>{
         setDoctors(allDoctors);

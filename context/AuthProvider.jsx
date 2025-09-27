@@ -41,7 +41,7 @@ const AuthProvider = ({children}) => {
     sessionStorage.setItem(key,JSON.stringify(value));
   }
 
-  const fetchAccessToken=async()=>{
+  const refreshToken=async()=>{
     try{
     const responseObj=await fetch('http://localhost:3000/refreshToken/',{
       headers:{
@@ -54,18 +54,40 @@ const AuthProvider = ({children}) => {
     console.log(response);
     setAccessToken(response.data.accessToken);
     saveToSessionStorage('access_token',response.data.accessToken);
+    return response.data.accessToken;
     }
     catch(error){
-      console.log(error);
+      throw error;
     }
   }
 
+  const fetchWithAuth=async(url,options={})=>{
+      console.log('In fetchWithAuth method')
+      let token=accessToken;
+      options.headers={...options.headers,
+      'Authorization':`Bearer ${token}`
+      }
+      console.log(options);
+      let responseObj;
+      try{
+          responseObj=await fetch(url,options);
+          if(responseObj.status===403){
+            try{
+                token=await refreshToken();
+            }
+            catch(error){
+              console.log(error);
+            }
+            options.headers['Authorization']=`Bearer ${token}`;
+            responseObj=await fetch(url,options);
+          }
+      }
+      catch(error){
+          throw error;
+      }
+      return responseObj;
+  };
 
-  useEffect(()=>{
-    if(userData){
-    fetchAccessToken();
-    }
-  },[userData])
 
   /*For simplicity,login logic is placed here;For production move this logic to seperate login component that
   collect real user input and call the login method by using useContext.
@@ -80,7 +102,7 @@ const AuthProvider = ({children}) => {
   const value={login};
 
   return (
-    <AuthContext.Provider value={{login,userData,accessToken}}>
+    <AuthContext.Provider value={{login,userData,fetchWithAuth}}>
       {children}
     </AuthContext.Provider>
   )

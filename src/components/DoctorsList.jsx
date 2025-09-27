@@ -26,6 +26,7 @@ const DoctorsList = ({allDoctors,doctors,setAllDoctors}) => {
     },[selectedDoctors])
 
     const handleDeleteDoctor=async (doctor)=>{
+
         console.log('handleDelete function');
         const deletedDoctor=doctor;
         const options={
@@ -42,6 +43,12 @@ const DoctorsList = ({allDoctors,doctors,setAllDoctors}) => {
         }
         catch(error){
             console.log(error);
+        }
+        if(shouldSelectAllDoctors){
+            setShouldSelectAllDoctors(false);
+        }
+        if(selectedDoctors){
+            setSelectedDoctors([]);
         }
     }
 
@@ -72,6 +79,12 @@ const DoctorsList = ({allDoctors,doctors,setAllDoctors}) => {
         }
         catch(error){
             console.log(error);
+        }
+        if(shouldSelectAllDoctors){
+            setShouldSelectAllDoctors(false);
+        }
+        if(selectedDoctors){
+            setSelectedDoctors([]);
         }
     }
 

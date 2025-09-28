@@ -10,6 +10,7 @@ const UpdateDoctor = ({doctor,setCurrentDoctor,setShouldUpdateDoctor,setActionSt
      const imageInputRef=useRef(null);
      const [profilePhoto,setProfilePhoto]=useState(null);
      const [isLoading,setIsLoading]=useState(false);
+     const [error,setError]=useState('');
      const {userData,fetchWithAuth}=useContext(AuthContext);
 
      useEffect(()=>{
@@ -37,7 +38,6 @@ const UpdateDoctor = ({doctor,setCurrentDoctor,setShouldUpdateDoctor,setActionSt
          data.profilePhoto=imageUrl;
        }
        console.log(data);
-       setCurrentDoctor(data);
        
        try {
          const options={
@@ -52,13 +52,17 @@ const UpdateDoctor = ({doctor,setCurrentDoctor,setShouldUpdateDoctor,setActionSt
          const responseObj=await fetchWithAuth(url,options);
          const response=await responseObj.json();
          if(responseObj.ok){
+            setCurrentDoctor(data);
             setActionStatus('Doctor Updated Successfully')
             setIsLoading(false);
             setShouldUpdateDoctor(false);   
          }
+
          console.log('response for update query:',response)
        } catch (error) {
          console.log(error);
+         setIsLoading(false);
+         setError('Unable to Update Doctor.Please check and try again.')
        }
      }
  
@@ -100,13 +104,18 @@ const UpdateDoctor = ({doctor,setCurrentDoctor,setShouldUpdateDoctor,setActionSt
         <h1 className='pt-2'>Update Doctor</h1>
         </div>
 
+        {error
+        &&
+        <p className='text-red-500 font-bold self-center text-wrap text-xs px-5'>{error}</p>
+        }
+
 
         
         {  imagePreview ?
                 <div className='h-32 w-32 self-center max-w-full '>
                   <img onClick={()=>{
                 imageInputRef.current.click();
-                }} className='rounded-full h-full w-full max-w-full  object-cover hover:opacity-50 duration-500 cursor-pointer' src={imagePreview} alt="" />
+                }} className='rounded-full h-full w-full aspect-[1/1] max-w-full  object-cover hover:opacity-50 duration-500 cursor-pointer' src={imagePreview} alt="" />
                 </div>
                 :
                 <span onClick={()=>{

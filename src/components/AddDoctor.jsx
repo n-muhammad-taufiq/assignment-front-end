@@ -12,6 +12,7 @@ const AddDoctor = ({setShouldAddDoctor,allDoctors,setAllDoctors,setActionStatus}
      const [profilePhoto,setProfilePhoto]=useState(null);
      const [isLoading,setIsLoading]=useState(false);
      const [isSubmissionAttempted,setIsSubmissionAttempted]=useState(false);
+     const [error,setError]=useState('');
      const {userData,fetchWithAuth}=useContext(AuthContext);
 
      const handleSubmit=async (event)=>{
@@ -47,6 +48,9 @@ const AddDoctor = ({setShouldAddDoctor,allDoctors,setAllDoctors,setActionStatus}
      }
  
      const handleAddDoctor=async()=>{
+       if(error){
+        setError('');
+       }
        const data=doctorDetailsInput;
        data.userId=userData.id;
        if(profilePhoto){
@@ -68,7 +72,7 @@ const AddDoctor = ({setShouldAddDoctor,allDoctors,setAllDoctors,setActionStatus}
          const responseObj=await fetchWithAuth(url,options)
          const response=await responseObj.json();
          console.log('response for insert query:',response)
-         if(responseObj.status===200){
+         if(responseObj.status===201){
           data.id=generateRandomId();
           setActionStatus('Doctor Added Successfully')
           setAllDoctors([...allDoctors,data]);
@@ -77,6 +81,8 @@ const AddDoctor = ({setShouldAddDoctor,allDoctors,setAllDoctors,setActionStatus}
          }
        } catch (error) {
          console.log(error);
+         setIsLoading(false);
+         setError('Unable to Add the Doctor.Please check and try again.');
        }
      }  
  
@@ -104,7 +110,7 @@ const AddDoctor = ({setShouldAddDoctor,allDoctors,setAllDoctors,setActionStatus}
    return (
     <>
      <div className='fixed z-30 top-0 left-0 right-0 bottom-0 bg-black/90 flex items-center justify-center py-3 p-3'>
-         <div className='fade-in flex flex-col gap-y-14 items-start bg-white px-1 rounded-lg text-sm h-full max-w-full font-bold overflow-y-auto hide-scrollbar'>
+         <div className='fade-in flex flex-col gap-y-8 items-start bg-white px-1 rounded-lg text-sm h-full max-w-full font-bold overflow-y-auto hide-scrollbar'>
  
               <div className='bg-white z-20 pb-2 flex sticky top-0 w-full  max-w-full justify-center pt-1'>
               <button onClick={()=>{
@@ -118,12 +124,17 @@ const AddDoctor = ({setShouldAddDoctor,allDoctors,setAllDoctors,setActionStatus}
               <h1 className='pt-2'>Add Doctor</h1>
 
               </div>
+
+              {error
+              &&
+              <p className='text-red-500 font-bold self-center text-wrap text-xs px-5'>{error}</p>
+              }
              
              {  imagePreview ?
-                <div className='h-32 w-32 self-center  max-w-full'>
+                <div className='h-32 w-32 max-w-full'>
                   <img onClick={()=>{
                 imageInputRef.current.click();
-                }} className='rounded-full h-full w-full object-cover hover:opacity-50 duration-500 cursor-pointer' src={imagePreview} alt="" />
+                }} className='rounded-full h-full w-full aspect-[1/1] object-cover hover:opacity-50 duration-500 cursor-pointer' src={imagePreview} alt="" />
                 </div>
                 :
                 <span onClick={()=>{

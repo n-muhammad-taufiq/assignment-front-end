@@ -25,6 +25,26 @@ const AddDoctor = ({setShouldAddDoctor,allDoctors,setAllDoctors,setActionStatus}
           form.reportValidity();
         }
      }
+
+     const generateRandomId=()=>{
+      console.log('Inside randomId function');
+      const currentIds=[];
+      allDoctors.forEach((doctor)=>{
+        currentIds.push(doctor.id);
+      });
+
+      console.log(currentIds);
+
+      let tempId=1;
+      while(currentIds.includes(tempId)){
+        tempId=Math.floor(Math.random()*allDoctors.length*2)
+        console.log('generated random id',tempId);
+        console.log(currentIds.includes(tempId));
+      }
+
+      return tempId;
+
+     }
  
      const handleAddDoctor=async()=>{
        const data=doctorDetailsInput;
@@ -48,7 +68,8 @@ const AddDoctor = ({setShouldAddDoctor,allDoctors,setAllDoctors,setActionStatus}
          const responseObj=await fetchWithAuth(url,options)
          const response=await responseObj.json();
          console.log('response for insert query:',response)
-         if(responseObj.ok){
+         if(responseObj.status===200){
+          data.id=generateRandomId();
           setActionStatus('Doctor Added Successfully')
           setAllDoctors([...allDoctors,data]);
           setIsLoading(false);

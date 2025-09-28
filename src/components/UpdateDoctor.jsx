@@ -14,6 +14,7 @@ const UpdateDoctor = ({doctor,setCurrentDoctor,setShouldUpdateDoctor,setActionSt
 
      useEffect(()=>{
         console.log(doctorDetails);
+        console.log(doctor);
      })
 
      const handleSubmit=async (event)=>{
@@ -47,7 +48,7 @@ const UpdateDoctor = ({doctor,setCurrentDoctor,setShouldUpdateDoctor,setActionSt
            method:'PUT',
            body:JSON.stringify(data)
          };
-         const url='http://localhost:3000/doctors'
+         const url='https://tectraclinic.onrender.com/doctors'
          const responseObj=await fetchWithAuth(url,options);
          const response=await responseObj.json();
          if(responseObj.ok){

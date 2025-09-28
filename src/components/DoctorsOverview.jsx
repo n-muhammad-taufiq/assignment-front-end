@@ -4,21 +4,21 @@ import { AuthContext } from '../../context/AuthProvider';
 
 const DoctorsOverview = () => {
 
-    const [allDoctors,setAllDoctors]=useState(null);
-    const [doctors,setDoctors]=useState(null);
-    const [search,setSearch]=useState(null);
+    const [allDoctors,setAllDoctors]=useState([]);
+    const [doctors,setDoctors]=useState([]);
+    const [search,setSearch]=useState('');
     const [shouldShowSpecialityOptions,setShouldShowSpecialityOptions]=useState(false);
     const [filter,setFilter]=useState({specialty:null,timePeriod:null})
     const [isSearchTriggered,setIsSearchTriggered]=useState(false);
     const {userData,fetchWithAuth}=useContext(AuthContext);
-
+    
     useEffect(()=>{
         const fetchDoctors=async()=>{
             try{
                 const options={
                     credentials:'include'
                 };
-                const url=`http://localhost:3000/doctors/${userData.id}`;
+                const url=`https://tectraclinic.onrender.com/doctors/${userData.id}`;
                 const responseObj=await fetchWithAuth(url,options);
                 if(responseObj.ok){
                     const response=await responseObj.json();
@@ -31,8 +31,14 @@ const DoctorsOverview = () => {
                 console.log(error);
             }
         }
-        if(!allDoctors && userData){
+        if(allDoctors.length===0 && userData){
+            console.log('Calling fetchDoctors');
             fetchDoctors();
+        }
+        else{
+            console.log('condition not satisfied to fetch doctors');
+            console.log(allDoctors);
+            console.log(userData);
         }
     },[allDoctors,userData])
 
@@ -47,10 +53,12 @@ const DoctorsOverview = () => {
 
     useEffect(()=>{
         const handleSearch=()=>{
-        if(search!=null){
+        console.log('inside handlesearch');
+        if(isSearchTriggered && !search){
+            console.log(allDoctors);
             setDoctors(allDoctors);
         }
-        else{
+        else if(isSearchTriggered && search){
             let newDoctors=[];
             allDoctors?.forEach((doctor)=>{
                 for(const [key,value] of Object.entries(doctor)){
@@ -75,11 +83,14 @@ const DoctorsOverview = () => {
                             }
                     }
                     } 
-                    else if(String(value).toLowerCase()===(search.toLowerCase())){
-                        if((filter.specialty && filter.specialty===doctor.specialty) || !filter.specialty){
+                    else if(String(value).includes((search.toLowerCase()))){
+                        if(filter.specialty && filter.specialty===doctor.specialty){
                                  console.log('filter specialty ',filter.specialty);
                                 console.log('doctor specialty ',doctor.specialty);
                                 newDoctors.push(doctor);  
+                        }
+                        else if(!filter.specialty){
+                            newDoctors.push(doctor);
                         }
                     }
                 }
@@ -90,11 +101,11 @@ const DoctorsOverview = () => {
         }
         
         let timeOut;
-        if(search!=null){
-            setTimeout(()=>{
-
+        
+        if(search && doctors && allDoctors){
+            timeOut=setTimeout(()=>{
             handleSearch();
-            },2000) 
+            },1000) 
         }
         
         
@@ -104,7 +115,7 @@ const DoctorsOverview = () => {
             }
         }
         
-    },[search]);
+    },[search,doctors,allDoctors]);
 
     useEffect(()=>{
         if(filter.specialty){

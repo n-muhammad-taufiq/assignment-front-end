@@ -12,7 +12,6 @@ const Expenses = () => {
           totalExpenses:1822240
     });
 
-    const expenseRef=useRef(null);
 
     const renderExpenses=()=>{
         const expenses=expensesData.expenses.sort((a,b)=>b.amount-a.amount).map((expense)=>{
@@ -45,7 +44,7 @@ const Expenses = () => {
                 </div>
                 <div className='flex justify-between w-full'>
                     {expenses.map((expense)=>(
-                    <div className='flex flex-col gap-y-2 items-center'>
+                    <div key={expense.expenseName} className='flex flex-col gap-y-2 items-center'>
                     <div className='flex gap-x-2'>
                     <span style={{backgroundColor:expense.borderColor}} className='h-4 w-4 rounded-full'></span>
                     <span className='text-xs'>{expense.expenseName}</span>

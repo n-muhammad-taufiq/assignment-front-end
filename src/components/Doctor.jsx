@@ -37,6 +37,7 @@ const Doctor = ({index,doctor,shouldSelectAllDoctors,selectedDoctors,setSelected
     }
 
     const UpdateDoctorPortal=()=>{
+        console.log(currentDoctor);
         return createPortal(
             <UpdateDoctor doctor={currentDoctor} setCurrentDoctor={setCurrentDoctor} setShouldUpdateDoctor={setShouldUpdateDoctor} setActionStatus={setActionStatus}></UpdateDoctor>,
             document.body

@@ -33,7 +33,7 @@ const DoctorsList = ({allDoctors,doctors,setAllDoctors}) => {
                 credentials:'include',
                 method:'DELETE'
         }
-        const url=`http://localhost:3000/doctors/${deletedDoctor.id}`;
+        const url=`https://tectraclinic.onrender.com/doctors/${deletedDoctor.id}`;
         try{
             await fetchWithAuth(url,options);
             const newDoctors=doctors.filter(doctor=>doctor.id!=deletedDoctor.id);
@@ -67,7 +67,7 @@ const DoctorsList = ({allDoctors,doctors,setAllDoctors}) => {
                 }
                 )
             }
-            const url='http://localhost:3000/doctors/deleteDoctors';
+            const url='https://tectraclinic.onrender.com/doctors/deleteDoctors';
             await fetchWithAuth(url,options);
             let newDoctors=[];
             allDoctors.forEach((doctor)=>{

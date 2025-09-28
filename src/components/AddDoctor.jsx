@@ -44,7 +44,7 @@ const AddDoctor = ({setShouldAddDoctor,allDoctors,setAllDoctors,setActionStatus}
            method:'POST',
            body:JSON.stringify(data)
          }
-         const url='http://localhost:3000/doctors'
+         const url='https://tectraclinic.onrender.com/doctors'
          const responseObj=await fetchWithAuth(url,options)
          const response=await responseObj.json();
          console.log('response for insert query:',response)

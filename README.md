@@ -1,9 +1,9 @@
 Tectra Clinic
-<br>
+<br><br>
 Installation :
-<br>
+<br><br>
 Clone the Repository and Install Dependencies:
-<br>
+<br><br>
 git clone https://github.com/n-muhammad-taufiq/tectra-clinic-front-end.git
 cd tectra-clinic-front-end
 <br<br>>npm install

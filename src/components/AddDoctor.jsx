@@ -4,7 +4,7 @@ import Loading from './Loading';
 import { AuthContext } from '../../context/AuthProvider';
 
 const AddDoctor = ({setShouldAddDoctor,allDoctors,setAllDoctors,setActionStatus}) => {
-     const [doctorDetailsInput,setDoctorDetailsInput]=useState({name:"",specialty:"",dateOfBirth:"",emailAddress:"",status:"active",countryCode:"+91",contactNumber:"",profilePhoto:""});
+     const [doctorDetailsInput,setDoctorDetailsInput]=useState({name:"",specialty:"",dateOfBirth:"",emailAddress:"",status:"active",countryCode:"91",contactNumber:"",profilePhoto:""});
      const [shouldShowStatusOptions,setShouldShowStatusOptions]=useState(false);
      const [imagePreview,setImagePreview]=useState(null);
      const imageInputRef=useRef(null);
@@ -223,14 +223,14 @@ const AddDoctor = ({setShouldAddDoctor,allDoctors,setAllDoctors,setActionStatus}
                <div className='flex gap-x-5 w-full  max-w-full'>
                  <div className='flex flex-col w-full gap-y-4  max-w-full'>
                      <label className='text-gray-700 font-bold max-w-full'>Contact Number</label> 
-                     <div className='flex items-center gap-x-3 w-full max-w-full'>
-                        <span className='text-gray-800'>+</span>
+                     <div className='flex items-center w-full max-w-full border border-gray-50 rounded-lg shadow-sm pl-2 '>
+                        <span className='text-gray-800  py-2 rounded-l-lg flex justify-center'>+</span>
                          <input onChange={(event)=>{
                          setDoctorDetailsInput({...doctorDetailsInput,countryCode:event.target.value})
-                       }} id='countryCode' value={`${doctorDetailsInput.countryCode}`} className={`border border-gray-100 w-12 shadow-sm pl-2 py-2 rounded-lg outline-none invalid:border-2 ${isSubmissionAttempted ? 'invalid:ring-2 invalid:ring-offset-2 invalid:ring-red-400 invalid:border-red-400' : ''}  duration-500`} required type="tel" maxLength={3}/>
+                       }} id='countryCode' value={`${doctorDetailsInput.countryCode}`} className={` w-12  pl-2 py-2 border-r-gray-200 border-r outline-none ${isSubmissionAttempted ? 'invalid:border-2  invalid:ring-2 invalid:ring-offset-2 invalid:ring-red-400 invalid:border-red-400' : ''}  duration-500`} required type="tel" maxLength={3}/>
                        <input onChange={(event)=>{
                          setDoctorDetailsInput({...doctorDetailsInput,contactNumber:event.target.value})
-                       }} id='contactNumber' value={doctorDetailsInput.contactNumber} className={`border border-gray-100 w-full shadow-sm pl-2 py-2 rounded-lg outline-none invalid:border-2 ${isSubmissionAttempted ? 'invalid:ring-2 invalid:ring-offset-2 invalid:ring-red-400 invalid:border-red-400' : ''}  duration-500`} required type="tel" maxLength={12} />
+                       }} id='contactNumber' value={doctorDetailsInput.contactNumber} className={`w-full pl-2 py-2 rounded-r-lg outline-none  ${isSubmissionAttempted ? 'invalid:border-2 invalid:ring-2 invalid:ring-offset-2 invalid:ring-red-400 invalid:border-red-400' : ''}  duration-500`} required type="tel" maxLength={12} />
                      </div>   
                  </div>
                </div>

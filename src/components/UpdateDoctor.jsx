@@ -200,15 +200,15 @@ const UpdateDoctor = ({doctor,setCurrentDoctor,setShouldUpdateDoctor,setActionSt
             <div className='flex gap-x-5 w-full max-w-full '>
                 <div className='flex flex-col gap-y-4 max-w-full '>
                     <label className='text-gray-700 font-bold max-w-full '>Contact Number</label>
-                    <div className='flex items-center gap-x-2 max-w-full '>
-                        <span className='text-lg font-normal'>+</span>
-                        <input required onChange={(event) => {
-                            setDoctorDetails({ ...doctorDetails, countryCode: event.target.value })
-                        }} id='countryCode' value={`${doctorDetails.countryCode}`} className='outline-none max-w-full  border border-gray-100 shadow-sm pl-2 py-2 rounded-md w-10 invalid:border-2 invalid:ring-2 invalid:ring-offset-2 invalid:ring-red-400 invalid:border-red-400 duration-500' type="tel" maxLength={3} />
-                        <input required onChange={(event) => {
-                            setDoctorDetails({ ...doctorDetails, contactNumber: event.target.value })
-                        }} id='contactNumber' value={doctorDetails.contactNumber} className='outline-none max-w-full  border border-gray-100 shadow-sm pl-2 py-2 rounded-lg w-full invalid:border-2 invalid:ring-2 invalid:ring-offset-2 invalid:ring-red-400 invalid:border-red-400 duration-500' type="tel" maxLength={12} />
-                    </div>
+                    <div className='flex items-center w-full max-w-full border border-gray-50 rounded-lg shadow-sm pl-2 '>
+                        <span className='text-gray-800  py-2 rounded-l-lg flex justify-center'>+</span>
+                         <input onChange={(event)=>{
+                         setDoctorDetails({...doctorDetails,countryCode:event.target.value})
+                       }} id='countryCode' value={`${doctorDetails.countryCode.slice(0)}`} className={` w-12  pl-2 py-2  border-r-gray-200 border-r  outline-none ${isSubmissionAttempted ? 'invalid:border-2  invalid:ring-2 invalid:ring-offset-2 invalid:ring-red-400 invalid:border-red-400' : ''}  duration-500`} required type="tel" maxLength={3}/>
+                       <input onChange={(event)=>{
+                         setDoctorDetails({...doctorDetails,contactNumber:event.target.value})
+                       }} id='contactNumber' value={doctorDetails.contactNumber} className={`w-full pl-2 py-2 rounded-r-lg outline-none  ${isSubmissionAttempted ? 'invalid:border-2 invalid:ring-2 invalid:ring-offset-2 invalid:ring-red-400 invalid:border-red-400' : ''}  duration-500`} required type="tel" maxLength={12} />
+                     </div>  
                 </div>
             </div>
 

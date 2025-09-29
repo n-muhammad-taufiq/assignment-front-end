@@ -165,7 +165,7 @@ const DoctorsOverview = () => {
         <div className='relative bg-white'>
             <button onClick={()=>{
                 setShouldShowSpecialityOptions(!shouldShowSpecialityOptions);
-            }} className='outline-none flex items-center gap-x-3 curs   or-pointer rounded-md border border-gray-500  px-4 py-2'>
+            }} className='outline-none flex items-center gap-x-3 cursor-pointer rounded-md border border-gray-500  px-4 py-2'>
             <p className='text-xs text-gray-800 font-bold'>{filter.specialty || 'Specialty'}</p>
             <svg className='bi bi-chevron-dowm' xmlns="http://www.w3.org/2000/svg" width="12" height="12" fill="currentColor" viewBox="0 0 16 16">
             <path fill-rule="evenodd" d="M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708"/>

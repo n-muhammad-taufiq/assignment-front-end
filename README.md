@@ -1,23 +1,23 @@
 Tectra Clinic
-
+<br>
 Installation :
-
+<br>
 Clone the Repository and Install Dependencies:
-
+<br>
 git clone https://github.com/n-muhammad-taufiq/tectra-clinic-front-end.git
-<br>cd tectra-clinic-front-end
-<br>npm install
-<br>
+cd tectra-clinic-front-end
+<br<br>>npm install
+<br><br>
 Usage :
-<br>
+<br><br>
 To run locally :
-<br>
+<br><br>
 npm run dev
-<br>
+<br><br>
 To create a production build :
-<br>
+<br><br>
 npm run build
-<br>
+<br<br>
 If you are running locally,make sure its origin is included in backend's CORS whitelist
-<br>
+<br><br>
 Deployed URL : https://tectraclinic.vercel.app/

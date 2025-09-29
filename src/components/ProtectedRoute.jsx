@@ -5,11 +5,9 @@ import Loading from './Loading';
 const ProtectedRoute = ({children}) => {
     const {userData}=useContext(AuthContext);
 
-    if(!userData){
-        return <Loading></Loading>
-    }
+  
 
-    if(userData){
+    if(true){
     return children;
     }
 }

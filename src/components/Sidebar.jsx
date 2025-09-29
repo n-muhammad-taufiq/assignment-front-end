@@ -1,8 +1,10 @@
 import React, { useState } from 'react'
+import {menuOptions} from '../menuOptions'
+import MenuOption from './MenuOption'
 
 const Sidebar = () => {
 
-
+  const [currentOption,setCurrentOption]=useState('Dashboard');
 
   return (
     <>
@@ -18,43 +20,16 @@ const Sidebar = () => {
       
       <div className='flex flex-col  gap-y-2 font-bold text-sm text-gray-800 pr-10'>
           <h1 className='text-gray-400 text-[0.6rem] font-normal'>OVERVIEW</h1>
-          <div className='flex gap-x-2 cursor-pointer p-2 rounded-md'>
-            <p>Dashboard</p>
-          </div>
-          <div className='flex gap-x-2 cursor-pointer p-2 rounded-md '>
-            <p>Dental Dashboard</p>
-          </div>
+          {menuOptions.overview.map((menuOption)=>(
+            <MenuOption optionName={menuOption.optionName} iconName={menuOption.iconName} navigationURL={menuOption.navigationURL} currentOption={currentOption} setCurrentOption={setCurrentOption}></MenuOption>
+          ))} 
       </div>
 
       <div className='flex flex-col gap-y-2 font-bold text-sm text-gray-800 pr-10'>
           <h1 className='text-gray-400 text-[0.6rem] font-normal'>APPLICATIONS</h1>
-          <div className='flex gap-x-2 cursor-pointer p-2 rounded-md '>
-            <p>Telemedicine</p>
-          </div>
-          <div className='flex gap-x-2 cursor-pointer p-2 rounded-md '>
-            <p>Inventory Management</p>
-          </div>
-          <div className='flex gap-x-2 cursor-pointer p-2 rounded-md '>
-            <p>Doctors</p>
-          </div>
-          <div className='flex gap-x-2 cursor-pointer p-2 rounded-md '>
-            <p>Patients</p>
-          </div>
-          <div className='flex gap-x-2 cursor-pointer p-2 rounded-md'>
-            <p>Appointments</p>
-          </div>
-          <div className='flex gap-x-2 cursor-pointer p-2 rounded-md '>
-            <p>Chats</p>
-          </div>
-          <div className='flex gap-x-2 cursor-pointer p-2 rounded-md '>
-            <p>Medical Services</p>
-          </div>
-          <div className='flex gap-x-2 cursor-pointer p-2 rounded-md'>
-            <p>Dental Services</p>
-          </div>
-          <div className='flex gap-x-2 cursor-pointer p-2 rounded-md '>
-            <p>Billing and Invoice</p>
-          </div>
+          {menuOptions.applications.map((menuOption)=>(
+            <MenuOption optionName={menuOption.optionName} iconName={menuOption.iconName} navigationURL={menuOption.navigationURL} currentOption={currentOption} setCurrentOption={setCurrentOption}></MenuOption>
+          ))}
       </div>
     </div>
     </>

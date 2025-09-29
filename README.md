@@ -1,12 +1,23 @@
-# React + Vite
+Tectra Clinic
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Installation :
 
-Currently, two official plugins are available:
+Clone the Repository and Install Dependencies:
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+git clone https://github.com/n-muhammad-taufiq/tectra-clinic-front-end.git
+cd tectra-clinic-front-end
+npm install
 
-## Expanding the ESLint configuration
+Usage :
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+To run locally :
+
+npm run dev
+
+To create a production build :
+
+npm run build
+
+If you are running locally,make sure its origin is included in backend's CORS whitelist
+
+Deployed URL : https://tectraclinic.vercel.app/

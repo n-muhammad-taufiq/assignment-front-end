@@ -2,13 +2,22 @@ import React, { useState } from 'react'
 import {menuOptions} from '../menuOptions'
 import MenuOption from './MenuOption'
 
-const Sidebar = () => {
+const Sidebar = ({shouldOpenMenu=false,setShouldOpenMenu}) => {
 
   const [currentOption,setCurrentOption]=useState('Dashboard');
 
   return (
     <>
-    <div className='flex flex-col h-screen border-r-2 border-r-gray-200 bg-slate-50 pt-5  pr-3 gap-y-7 pl-4 max-lg:hidden w-fit '>
+    <div className={`${!shouldOpenMenu ? 'max-lg:hidden' : 'slide-left-right'} flex flex-col h-screen border-r-2 border-r-gray-200 bg-slate-50 pt-5 pr-3 gap-y-7 pl-4 max-lg:relative max-lg:slide-left-right max-lg:w-fit max-lg:h-full max-lg:border-r max-lg:border-r-gray-100 max-lg:text-sm max-md:text-xs px-3 `}>
+
+
+      <button onClick={()=>{
+            setShouldOpenMenu(false);
+        }} className='lg:hidden absolute right-2 top-2 h-5 w-5 rounded-full flex items-center justify-center cursor-pointer '>
+        <svg className='fill-gray-500' xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" class="bi bi-x" viewBox="0 0 16 16">
+        <path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708"/>
+        </svg>
+      </button>
 
       <div className='flex flex-col gap-y-5 '>
             <div className='flex gap-x-1 items-center'>

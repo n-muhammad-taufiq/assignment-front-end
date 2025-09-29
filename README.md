@@ -5,8 +5,8 @@ Installation :
 Clone the Repository and Install Dependencies:
 <br><br>
 git clone https://github.com/n-muhammad-taufiq/tectra-clinic-front-end.git
-cd tectra-clinic-front-end
-<br<br>>npm install
+<br>cd tectra-clinic-front-end
+<br>npm install
 <br><br>
 Usage :
 <br><br>

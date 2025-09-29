@@ -51,7 +51,7 @@ const Doctor = ({index,doctor,shouldSelectAllDoctors,selectedDoctors,setSelected
   return (
     <>
     
-    <tr className='text-sm font-bold'>
+    <tr className='text-sm font-bold '>
         <td className='p-3'>
             <div className='flex items-center gap-x-2'>
             <input onChange={(event)=>{

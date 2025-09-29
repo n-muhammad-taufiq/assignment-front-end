@@ -147,8 +147,8 @@ const DoctorsOverview = () => {
 
     if(allDoctors && doctors){
         return (
-        <div className='flex flex-col gap-y-2  bg-white rounded-lg w-full max-w-full pb-10'>
-        <div className='flex max-w-full max-lg:flex-col max-lg:items-start max-lg:gap-y-3 w-full justify-between items-center p-3 '>
+        <div className='flex flex-col gap-y-2  bg-white  max-w-full w-fit pb-10  '>
+        <div className='flex sticky top-18 left-0 right-0 border border-gray-50 z-20  bg-white max-w-full max-lg:flex-col max-lg:items-start max-lg:gap-y-3 w-full justify-between items-center p-3 '>
         <h1 className='font-bold max-lg:text-sm max-md:text-xs'>Doctors Overview</h1>
         <div className='flex max-lg:flex-col max-lg:items-start max-lg:gap-y-2 max-w-full gap-x-4 items-center '>
         <div className='flex max-w-full items-center gap-x-4 bg-gray-100 p-3 rounded-md'>
@@ -165,7 +165,7 @@ const DoctorsOverview = () => {
         <div className='relative bg-white'>
             <button onClick={()=>{
                 setShouldShowSpecialityOptions(!shouldShowSpecialityOptions);
-            }} className='outline-none flex items-center gap-x-3 cursor-pointer rounded-md border border-gray-500  px-4 py-2'>
+            }} className='outline-none flex items-center gap-x-3 curs   or-pointer rounded-md border border-gray-500  px-4 py-2'>
             <p className='text-xs text-gray-800 font-bold'>{filter.specialty || 'Specialty'}</p>
             <svg className='bi bi-chevron-dowm' xmlns="http://www.w3.org/2000/svg" width="12" height="12" fill="currentColor" viewBox="0 0 16 16">
             <path fill-rule="evenodd" d="M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708"/>

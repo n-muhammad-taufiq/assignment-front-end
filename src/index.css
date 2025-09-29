@@ -2,7 +2,7 @@
 
 @font-face {
   font-family: "raleway";
-  src: url('./assets/fonts/Raleway-Regular.ttf')
+  src: url('assets/fonts/Raleway-Regular.ttf')
 }
 
 @keyframes fadeIn {
@@ -13,6 +13,7 @@
     opacity: 1;
   }
 }
+
 
 @keyframes loading {
   0%{

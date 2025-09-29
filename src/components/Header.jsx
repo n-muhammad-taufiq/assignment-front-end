@@ -101,7 +101,7 @@ const Header = () => {
         </button>
         <div className='flex flex-col gap-y-5 '>
         <div className='flex gap-x-1 items-center'>
-        <img className='h-7 w-fit' src="./src/assets/icons/tectra_technologies_logo.png" alt="" />
+        <img className='h-7 w-fit' src="assets/icons/tectra_clinic_logo.png" alt="" />
         <h1 className='font-black text-base'>Tectra <span className='text-gray-950 font-bold'>Clinic</span></h1>
         </div>
         <span className='h-[1px] w-full bg-gray-200 self-center'></span>    

@@ -29,7 +29,7 @@ const StatisticCard = ({title,previousValue,currentValue,total}) => {
             </svg>
         </div>
         }
-        <img className='h-10 w-18 max-lg:h-10 max-lg:w-12 max-h-full max-w-full self-baseline' src="./src/assets/images/graph.png" alt="" />
+        <img className='h-10 w-18 max-lg:h-10 max-lg:w-12 max-h-full max-w-full self-baseline' src="assets/images/graph.png" alt="" />
         </div>
     </div>
   )

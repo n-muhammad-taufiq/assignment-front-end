@@ -17,7 +17,7 @@ npm run dev
 To create a production build :
 <br><br>
 npm run build
-<br<br>
+<br><br>
 If you are running locally,make sure its origin is included in backend's CORS whitelist
 <br><br>
 Deployed URL : https://tectraclinic.vercel.app/

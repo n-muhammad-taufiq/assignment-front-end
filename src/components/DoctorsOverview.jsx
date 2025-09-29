@@ -147,8 +147,8 @@ const DoctorsOverview = () => {
 
     if(allDoctors && doctors){
         return (
-        <div className='flex flex-col gap-y-2  bg-white  max-w-full w-fit pb-10  '>
-        <div className='flex sticky top-18 left-0 right-0 border border-gray-50 z-20  bg-white max-w-full max-lg:flex-col max-lg:items-start max-lg:gap-y-3 w-full justify-between items-center p-3 '>
+        <div className='flex flex-col gap-y-2  bg-white  max-w-full w-full pb-10  '>
+        <div className='flex border border-gray-50 z-20  bg-white max-w-full max-lg:flex-col max-lg:items-start max-lg:gap-y-3 w-full justify-between items-center p-3 '>
         <h1 className='font-bold max-lg:text-sm max-md:text-xs'>Doctors Overview</h1>
         <div className='flex max-lg:flex-col max-lg:items-start max-lg:gap-y-2 max-w-full gap-x-4 items-center '>
         <div className='flex max-w-full items-center gap-x-4 bg-gray-100 p-3 rounded-md'>

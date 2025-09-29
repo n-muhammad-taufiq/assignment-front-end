@@ -20,7 +20,7 @@ const Header = () => {
 
   return (
     <>
-    <div className='flex sticky top-0 z-20 w-full items-center bg-slate-50 px-8 max-lg:px-2 py-4 justify-between gap-x-3 border-b-2 border-b-gray-200'>
+    <div className='flex sticky top-0 z-30 w-full items-center bg-slate-50 px-8 max-lg:px-2 py-4 justify-between gap-x-3 border-b-2 border-b-gray-200'>
       {
       !shouldOpenMenu &&
       <div className='lg:hidden'>

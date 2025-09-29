@@ -91,7 +91,7 @@ const DoctorsList = ({allDoctors,doctors,setAllDoctors}) => {
 
   return (
     <>
-    <div className='flex sticky top-32 max-lg:top-60 z-20 border-b border-gray-50 pb-2 bg-white w-full justify-end max-lg:justify-end max-lg:py-2 items-center px-3 gap-x-5'>
+    <div className='flex max-lg:top-60 z-20 border-b border-gray-50 pb-2 bg-white w-full justify-end max-lg:justify-end max-lg:py-2 items-center px-3 gap-x-5'>
     <div className='flex gap-x-5 '>
         {selectedDoctors.length>0 
         &&

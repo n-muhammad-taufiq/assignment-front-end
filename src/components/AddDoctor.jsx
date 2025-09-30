@@ -28,19 +28,15 @@ const AddDoctor = ({setShouldAddDoctor,allDoctors,setAllDoctors,setActionStatus}
      }
 
      const generateRandomId=()=>{
-      console.log('Inside randomId function');
       const currentIds=[];
       allDoctors.forEach((doctor)=>{
         currentIds.push(doctor.id);
       });
 
-      console.log(currentIds);
 
       let tempId=1;
       while(currentIds.includes(tempId)){
         tempId=Math.floor(Math.random()*allDoctors.length*2)
-        console.log('generated random id',tempId);
-        console.log(currentIds.includes(tempId));
       }
 
       return tempId;
@@ -57,8 +53,7 @@ const AddDoctor = ({setShouldAddDoctor,allDoctors,setAllDoctors,setActionStatus}
          const imageUrl=await handleUploadImage();
          data.profilePhoto=imageUrl;
        }  
-       console.log(data);
-       
+
        try {
         const options={
           headers:{
@@ -71,7 +66,6 @@ const AddDoctor = ({setShouldAddDoctor,allDoctors,setAllDoctors,setActionStatus}
          const url='https://tectraclinic.onrender.com/doctors'
          const responseObj=await fetchWithAuth(url,options)
          const response=await responseObj.json();
-         console.log('response for insert query:',response)
          if(responseObj.status===201){
           data.id=generateRandomId();
           setActionStatus('Doctor Added Successfully')
@@ -80,7 +74,7 @@ const AddDoctor = ({setShouldAddDoctor,allDoctors,setAllDoctors,setActionStatus}
           setShouldAddDoctor(false);
          }
        } catch (error) {
-         console.log(error);
+         console.log(error)
          setIsLoading(false);
          setError('Unable to Add the Doctor.Please check and try again.');
        }
@@ -88,7 +82,6 @@ const AddDoctor = ({setShouldAddDoctor,allDoctors,setAllDoctors,setActionStatus}
  
      const handleUploadImage=async ()=>{
          const formData=new FormData();
-         console.log(doctorDetailsInput);
          formData.append("file",profilePhoto);
          formData.append('upload_preset','tectra_clinic');
          try{
@@ -97,8 +90,6 @@ const AddDoctor = ({setShouldAddDoctor,allDoctors,setAllDoctors,setActionStatus}
              body:formData
            });
            const data=await response.json();
-           console.log(data);
-           console.log(data.secure_url);
            return data.secure_url;
            
          }
@@ -149,7 +140,6 @@ const AddDoctor = ({setShouldAddDoctor,allDoctors,setAllDoctors,setActionStatus}
              
  
              <input onChange={async (image)=>{
-               console.log(image);
                const previewURL=URL.createObjectURL(image.target.files[0]);
                setImagePreview(previewURL);
                setProfilePhoto(image.target.files[0]);
@@ -237,7 +227,6 @@ const AddDoctor = ({setShouldAddDoctor,allDoctors,setAllDoctors,setActionStatus}
  
                <button onClick={()=>{
                 if(!isSubmissionAttempted){
-                console.log('setting IsSubmissionAttempted to true');
                 setIsSubmissionAttempted(true);
                 }
                }}  type='submit' className='flex w-full  max-w-full justify-end text-gray-700 font-bold text-xs self-end cursor-pointer hover:opacity-50 duration-500 sticky bottom-0 right-0 py-4  bg-white'>Add Doctor</button>

@@ -22,31 +22,23 @@ const Doctor = ({index,doctor,shouldSelectAllDoctors,selectedDoctors,setSelected
     },[shouldSelectAllDoctors]);
 
     const handleSelectDoctor=()=>{
-        console.log('current selected doctors: ',selectedDoctors);
-        console.log('selecting doctor : ',currentDoctor);
         setIsSelected(true);
         setSelectedDoctors(prev=>[...prev,currentDoctor]);
     }
 
     const handleRemoveFromSelected=()=>{
-        console.log('current selected doctors: ',selectedDoctors);
-        console.log('removing doctor : ',currentDoctor);
         setIsSelected(false);
         const newSelectedDoctors=selectedDoctors.filter(selectedDoctor=>selectedDoctor.id!=currentDoctor.id)
         setSelectedDoctors(newSelectedDoctors);
     }
 
     const UpdateDoctorPortal=()=>{
-        console.log(currentDoctor);
         return createPortal(
             <UpdateDoctor doctor={currentDoctor} setCurrentDoctor={setCurrentDoctor} setShouldUpdateDoctor={setShouldUpdateDoctor} setActionStatus={setActionStatus}></UpdateDoctor>,
             document.body
         )
     }
 
-    useEffect(()=>{
-        console.log(shouldShowActionMenu);
-    })
 
   return (
     <>

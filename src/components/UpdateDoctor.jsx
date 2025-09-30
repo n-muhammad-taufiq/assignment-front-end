@@ -13,10 +13,6 @@ const UpdateDoctor = ({doctor,setCurrentDoctor,setShouldUpdateDoctor,setActionSt
      const [error,setError]=useState('');
      const {userData,fetchWithAuth}=useContext(AuthContext);
 
-     useEffect(()=>{
-        console.log(doctorDetails);
-        console.log(doctor);
-     })
 
      const handleSubmit=async (event)=>{
         event.preventDefault();
@@ -37,7 +33,6 @@ const UpdateDoctor = ({doctor,setCurrentDoctor,setShouldUpdateDoctor,setActionSt
          const imageUrl=await handleUploadImage();
          data.profilePhoto=imageUrl;
        }
-       console.log(data);
        
        try {
          const options={
@@ -58,7 +53,6 @@ const UpdateDoctor = ({doctor,setCurrentDoctor,setShouldUpdateDoctor,setActionSt
             setShouldUpdateDoctor(false);   
          }
 
-         console.log('response for update query:',response)
        } catch (error) {
          console.log(error);
          setIsLoading(false);
@@ -68,7 +62,6 @@ const UpdateDoctor = ({doctor,setCurrentDoctor,setShouldUpdateDoctor,setActionSt
  
      const handleUploadImage=async ()=>{
          const formData=new FormData();
-         console.log(doctorDetails);
          formData.append("file",profilePhoto);
          formData.append('upload_preset','tectra_clinic');
          try{
@@ -77,8 +70,6 @@ const UpdateDoctor = ({doctor,setCurrentDoctor,setShouldUpdateDoctor,setActionSt
              body:formData
            });
            const data=await response.json();
-           console.log(data);
-           console.log(data.secure_url);
            return data.secure_url;
            
          }
@@ -130,7 +121,6 @@ const UpdateDoctor = ({doctor,setCurrentDoctor,setShouldUpdateDoctor,setActionSt
         
            
         <input onChange={async (image) => {
-            console.log(image);
             const previewURL = URL.createObjectURL(image.target.files[0]);
             setImagePreview(previewURL);
             setProfilePhoto(image.target.files[0]);

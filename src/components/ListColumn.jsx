@@ -2,15 +2,12 @@ import React from 'react'
 import { useEffect } from 'react';
 
 const ListColumn = ({columnName,shouldSelectAllDoctors,setShouldSelectAllDoctors,setSelectedDoctors}) => {
-  useEffect(()=>{
-    console.log(shouldSelectAllDoctors);
-  })
+ 
   return (
     <th className='p-3'>
     <div className='flex items-center gap-x-2 text-gray-800'>
         {columnName==='No' && 
         <input checked={shouldSelectAllDoctors} onChange={(event)=>{
-          console.log(event.target.checked);
           if(event.target.checked){
             setShouldSelectAllDoctors(true);
           }

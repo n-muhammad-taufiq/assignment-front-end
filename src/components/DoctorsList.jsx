@@ -16,7 +16,6 @@ const DoctorsList = ({allDoctors,doctors,setAllDoctors}) => {
     const {fetchWithAuth}=useContext(AuthContext);
 
     useEffect(()=>{
-        console.log(selectedDoctors);
         if(selectedDoctors.length===0){
             setShouldSelectAllDoctors(false);
         }
@@ -27,7 +26,6 @@ const DoctorsList = ({allDoctors,doctors,setAllDoctors}) => {
 
     const handleDeleteDoctor=async (doctor)=>{
 
-        console.log('handleDelete function');
         const deletedDoctor=doctor;
         const options={
                 credentials:'include',
@@ -37,8 +35,6 @@ const DoctorsList = ({allDoctors,doctors,setAllDoctors}) => {
         try{
             await fetchWithAuth(url,options);
             const newDoctors=doctors.filter(doctor=>doctor.id!=deletedDoctor.id);
-            console.log('deleted doctor: ',deletedDoctor);
-            console.log('newDoctors: ',newDoctors);
             setAllDoctors(newDoctors);
         }
         catch(error){
@@ -54,7 +50,6 @@ const DoctorsList = ({allDoctors,doctors,setAllDoctors}) => {
 
     const handleMultipleDeletion=async()=>{
         const data=selectedDoctors.map(doctor=>doctor.id);
-        console.log('data for multiple deleton',data);
          try{
             const options={
                  headers:{

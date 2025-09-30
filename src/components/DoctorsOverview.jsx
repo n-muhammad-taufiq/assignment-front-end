@@ -22,7 +22,6 @@ const DoctorsOverview = () => {
                 const responseObj=await fetchWithAuth(url,options);
                 if(responseObj.ok){
                     const response=await responseObj.json();
-                    console.log(response);
                     setAllDoctors(response.data.doctors);
                     setDoctors(response.data.doctors);
                 }
@@ -32,13 +31,7 @@ const DoctorsOverview = () => {
             }
         }
         if(allDoctors.length===0 && userData){
-            console.log('Calling fetchDoctors');
             fetchDoctors();
-        }
-        else{
-            console.log('condition not satisfied to fetch doctors');
-            console.log(allDoctors);
-            console.log(userData);
         }
     },[allDoctors,userData])
 
@@ -46,23 +39,16 @@ const DoctorsOverview = () => {
         setDoctors(allDoctors);
     },[allDoctors])
 
-    useEffect(()=>{
-        console.log('doctors:',doctors);
-        console.log('allDoctors:',allDoctors)
-    },[doctors,allDoctors]);
 
     useEffect(()=>{
         const handleSearch=()=>{
-        console.log('inside handlesearch');
         if(isSearchTriggered && !search){
-            console.log(allDoctors);
             setDoctors(allDoctors);
         }
         else if(isSearchTriggered && search){
             let newDoctors=[];
             allDoctors?.forEach((doctor)=>{
                 for(const [key,value] of Object.entries(doctor)){
-                    console.log('doctor',doctor);
                     if(key==='dateOfBirth'){
                        const date=new Date(value);
                        const day=String(date.getDate()).padStart(2,"0");
@@ -76,17 +62,12 @@ const DoctorsOverview = () => {
 
                     if(format1.includes(search.toLowerCase())|| format2.includes(search.toLowerCase()) || format3.includes(search.toLowerCase())){
                             if((filter.specialty && filter.specialty===doctor.specialty) || !filter.specialty){
-                                console.log('filter specialty ',filter.specialty);
-                                console.log('doctor specialty ',doctor.specialty);
-
                                 newDoctors.push(doctor);  
                             }
                     }
                     } 
                     else if(String(value).includes((search.toLowerCase()))){
                         if(filter.specialty && filter.specialty===doctor.specialty){
-                                 console.log('filter specialty ',filter.specialty);
-                                console.log('doctor specialty ',doctor.specialty);
                                 newDoctors.push(doctor);  
                         }
                         else if(!filter.specialty){
@@ -95,7 +76,6 @@ const DoctorsOverview = () => {
                     }
                 }
             });
-            console.log(newDoctors);
             setDoctors(newDoctors);
         }
         }

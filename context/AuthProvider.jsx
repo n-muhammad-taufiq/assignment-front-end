@@ -16,7 +16,6 @@ const AuthProvider = ({children}) => {
   })
 
   const login=async (loginDetails)=>{
-    console.log(loginDetails);
     try {
       const responseObj=await fetch('https://tectraclinic.onrender.com/login',{
         headers:{
@@ -31,7 +30,6 @@ const AuthProvider = ({children}) => {
       setAccessToken(response.data.accessToken);
       saveToSessionStorage('user_data',response.data.user);
       saveToSessionStorage('access_token',response.data.accessToken);
-      console.log(response);
     } catch (error) {
       console.log(error);
     }
@@ -43,7 +41,7 @@ const AuthProvider = ({children}) => {
 
   const refreshToken=async()=>{
     try{
-    const responseObj=await fetch('https://tectraclinic.onrender.com/refreshToken',{
+    const responseObj=await fetch('https://tectraclinic.onrender.com/login',{
       headers:{
         'Authorization':`Bearer ${accessToken}`
       },
@@ -62,12 +60,10 @@ const AuthProvider = ({children}) => {
   }
 
   const fetchWithAuth=async(url,options={})=>{
-      console.log('In fetchWithAuth method')
       let token=accessToken;
       options.headers={...options.headers,
       'Authorization':`Bearer ${token}`
       }
-      console.log(options);
       let responseObj;
       try{
           responseObj=await fetch(url,options);

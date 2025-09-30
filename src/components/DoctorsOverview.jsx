@@ -42,37 +42,41 @@ const DoctorsOverview = () => {
 
     useEffect(()=>{
         const handleSearch=()=>{
-        if(isSearchTriggered && !search){
+        if(isSearchTriggered && search===''){
             setDoctors(allDoctors);
         }
         else if(isSearchTriggered && search){
             let newDoctors=[];
+            let addedDoctorIds=[]
             allDoctors?.forEach((doctor)=>{
                 for(const [key,value] of Object.entries(doctor)){
-                    if(key==='dateOfBirth'){
-                       const date=new Date(value);
-                       const day=String(date.getDate()).padStart(2,"0");
-                       const month=String(date.getMonth()+1).padStart(2,"0");
-                       const year=date.getFullYear();
+                        if(!addedDoctorIds.includes(doctor.id)){
+                            if(key==='dateOfBirth'){
+                            const date=new Date(value);
+                            const day=String(date.getDate()).padStart(2,"0");
+                            const month=String(date.getMonth()+1).padStart(2,"0");
+                            const year=date.getFullYear();
+                            const format1=date.toLocaleString('default',{day:'numeric',month:'short',year:'numeric'}).toLowerCase();
+                            const format2=`${year}/${month}/${day}`;
+                            const format3=`${year}-${month}-${day}`;
 
-                       const format1=date.toLocaleString('default',{day:'numeric',month:'short',year:'numeric'}).toLowerCase();
-                       const format2=`${year}/${month}/${day}`;
-                       const format3=`${year}-${month}-${day}`;
-
-
-                    if(format1.includes(search.toLowerCase())|| format2.includes(search.toLowerCase()) || format3.includes(search.toLowerCase())){
-                            if((filter.specialty && filter.specialty===doctor.specialty) || !filter.specialty){
-                                newDoctors.push(doctor);  
-                            }
-                    }
-                    } 
-                    else if(String(value).includes((search.toLowerCase()))){
-                        if(filter.specialty && filter.specialty===doctor.specialty){
-                                newDoctors.push(doctor);  
-                        }
-                        else if(!filter.specialty){
-                            newDoctors.push(doctor);
-                        }
+                                if(format1.includes(search.toLowerCase())|| format2.includes(search.toLowerCase()) || format3.includes(search.toLowerCase())){
+                                    if((filter.specialty && filter.specialty===doctor.specialty) || !filter.specialty){
+                                    newDoctors.push(doctor);  
+                                    addedDoctorIds.push(doctor.id);
+                                    }
+                                }
+                            } 
+                            else if(String(value).includes((search.toLowerCase()))){
+                                if(filter.specialty && filter.specialty===doctor.specialty){
+                                    newDoctors.push(doctor);  
+                                    addedDoctorIds.push(doctor.id);
+                                }
+                                else if(!filter.specialty){
+                                    newDoctors.push(doctor);
+                                    addedDoctorIds.push(doctor.id);
+                                }
+                                }
                     }
                 }
             });
@@ -82,7 +86,7 @@ const DoctorsOverview = () => {
         
         let timeOut;
         
-        if(search && doctors && allDoctors){
+        if(allDoctors){
             timeOut=setTimeout(()=>{
             handleSearch();
             },1000) 
@@ -95,7 +99,7 @@ const DoctorsOverview = () => {
             }
         }
         
-    },[search,doctors,allDoctors]);
+    },[search,allDoctors]);
 
     useEffect(()=>{
         if(filter.specialty){
@@ -153,7 +157,7 @@ const DoctorsOverview = () => {
             </button>
             {shouldShowSpecialityOptions
             &&
-            <div className='absolute border border-gray-100 shadow-sm text-xs text-nowrap left-1/2 transform-[translateX(-50%)] flex flex-col items-start gap-y-2 text-gray-700 font-bold bg-white p-2 rounded-sm'>
+            <div className='absolute z-20 border border-gray-100 shadow-sm text-xs text-nowrap left-1/2 transform-[translateX(-50%)] flex flex-col items-start gap-y-2 text-gray-700 font-bold bg-white p-2 rounded-sm'>
                 <button className='hover:bg-gray-100 duration-500 cursor-pointer p-1 rounded-sm w-full flex items-start' onClick={()=>{
                     setFilter({specialty:null});
                     setShouldShowSpecialityOptions(false);

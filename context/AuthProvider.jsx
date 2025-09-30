@@ -18,7 +18,7 @@ const AuthProvider = ({children}) => {
   const login=async (loginDetails)=>{
     console.log(loginDetails);
     try {
-      const responseObj=await fetch('http://localhost:3000/login',{
+      const responseObj=await fetch('https://tectraclinic.onrender.com/login',{
         headers:{
           'Content-Type':'application/json'
         },

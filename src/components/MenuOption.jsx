@@ -10,7 +10,7 @@ const MenuOption = ({optionName,iconName,navigationURL,currentOption,setCurrentO
   return (
     <div onClick={()=>{
         setCurrentOption(optionName)
-        //navigate('') -> replace this with actual route path in production
+        //navigate('') -> use navigationURL in production
     }} className={`${currentOption===optionName ? 'bg-blue-100' : ''} flex items-center gap-x-2 cursor-pointer p-2 px-3 rounded-lg`}>
         <p>{optionName}</p>
     </div>

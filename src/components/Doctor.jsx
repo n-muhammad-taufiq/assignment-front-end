@@ -61,7 +61,7 @@ const Doctor = ({index,doctor,shouldSelectAllDoctors,selectedDoctors,setSelected
         <td className='p-3'>
             <div className='flex items-center gap-x-3'>
                 {currentDoctor.profilePhoto ?
-                <img className='h-8 w-8 rounded-full object-cover mb-1' src={currentDoctor.profilePhoto} alt="" />
+                <img className='h-8 w-8 aspect-square rounded-full object-cover mb-1' src={currentDoctor.profilePhoto} alt="" />
                 :
                 <span className='self-center flex items-center justify-center h-8 w-8 bg-gray-100 p-1 rounded-full'>
                 <svg className='bi bi-person-fill fill-gray-200 ' xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16">

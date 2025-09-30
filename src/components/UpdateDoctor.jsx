@@ -194,10 +194,10 @@ const UpdateDoctor = ({doctor,setCurrentDoctor,setShouldUpdateDoctor,setActionSt
                         <span className='text-gray-800  py-2 rounded-l-lg flex justify-center'>+</span>
                          <input onChange={(event)=>{
                          setDoctorDetails({...doctorDetails,countryCode:event.target.value})
-                       }} id='countryCode' value={`${doctorDetails.countryCode.slice(0)}`} className={` w-12  pl-2 py-2  border-r-gray-200 border-r  outline-none ${isSubmissionAttempted ? 'invalid:border-2  invalid:ring-2 invalid:ring-offset-2 invalid:ring-red-400 invalid:border-red-400' : ''}  duration-500`} required type="tel" maxLength={3}/>
+                       }} id='countryCode' value={`${doctorDetails.countryCode.slice(0)}`} className='w-12  pl-2 py-2  border-r-gray-200 border-r  outline-none  invalid:border-2  invalid:ring-2 invalid:ring-offset-2 invalid:ring-red-400 invalid:border-red-400 duration-500' required type="tel" maxLength={3}/>
                        <input onChange={(event)=>{
                          setDoctorDetails({...doctorDetails,contactNumber:event.target.value})
-                       }} id='contactNumber' value={doctorDetails.contactNumber} className={`w-full pl-2 py-2 rounded-r-lg outline-none  ${isSubmissionAttempted ? 'invalid:border-2 invalid:ring-2 invalid:ring-offset-2 invalid:ring-red-400 invalid:border-red-400' : ''}  duration-500`} required type="tel" maxLength={12} />
+                       }} id='contactNumber' value={doctorDetails.contactNumber} className='w-full pl-2 py-2 rounded-r-lg outline-none invalid:border-2 invalid:ring-2 invalid:ring-offset-2 invalid:ring-red-400 invalid:border-red-400 duration-500' required type="tel" maxLength={12} />
                      </div>  
                 </div>
             </div>

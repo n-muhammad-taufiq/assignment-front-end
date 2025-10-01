@@ -184,14 +184,14 @@ const UpdateDoctor = ({doctor,setCurrentDoctor,setShouldUpdateDoctor,setActionSt
                         <div className='absolute -bottom-15 left-0 right-0 border-2 border-gray-100 flex flex-col max-w-full  gap-y-2 bg-white text-xs z-20 rounded-sm px-4 py-2'>
                             <button onClick={(event) => {
                                 event.preventDefault();
-                                setDoctorDetails({ ...doctorDetails, status: 'active' });
+                                setDoctorDetails({ ...doctorDetails, status: 'Active' });
                                 setShouldShowStatusOptions(false);
-                            }} className='text-gray-700 font-bold max-w-full  hover:opacity-50 duration-500 cursor-pointer w-fit'>active</button>
+                            }} className='text-gray-700 font-bold max-w-full  hover:opacity-50 duration-500 cursor-pointer w-full flex justify-start'>Active</button>
                             <button onClick={(event) => {
                                 event.preventDefault();
-                                setDoctorDetails({ ...doctorDetails, status: 'inactive' });
+                                setDoctorDetails({ ...doctorDetails, status: 'Inactive' });
                                 setShouldShowStatusOptions(false);
-                            }} className='text-gray-700 font-bold max-w-full  hover:opacity-50 duration-500 cursor-pointer w-fit'>inactive</button>
+                            }} className='text-gray-700 font-bold max-w-full  hover:opacity-50 duration-500 cursor-pointer w-full flex justify-start'>Inactive</button>
                         </div>
                     }
                 </div>

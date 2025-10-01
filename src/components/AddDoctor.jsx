@@ -205,14 +205,14 @@ const AddDoctor = ({setShouldAddDoctor,allDoctors,setAllDoctors,setActionStatus}
                        <div className='absolute -bottom-15 left-0  max-w-full right-0 border-2 border-gray-100 flex flex-col  gap-y-2 bg-white text-xs z-20 rounded-sm px-4 py-2'>
                        <button onClick={(event)=>{
                          event.preventDefault();
-                         setDoctorDetailsInput({...doctorDetailsInput,status:'active'});
+                         setDoctorDetailsInput({...doctorDetailsInput,status:'Inactive'});
                          setShouldShowStatusOptions(false);
-                       }} className='text-gray-700 font-bold hover:opacity-50 duration-500 cursor-pointer w-fit'>Active</button>
+                       }} className='text-gray-700 font-bold hover:opacity-50 duration-500 cursor-pointer w-full flex justify-start'>Active</button>
                        <button onClick={(event)=>{
                          event.preventDefault();
-                         setDoctorDetailsInput({...doctorDetailsInput,status:'inactive'});
+                         setDoctorDetailsInput({...doctorDetailsInput,status:'Active'});
                          setShouldShowStatusOptions(false);
-                       }} className='text-gray-700 font-bold hover:opacity-50 duration-500 cursor-pointer w-fit'>Inactive</button>
+                       }} className='text-gray-700 font-bold hover:opacity-50 duration-500 cursor-pointer w-full flex justify-start'>Inactive</button>
                        </div>
                      }
                      

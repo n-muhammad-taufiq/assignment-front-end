@@ -43,7 +43,12 @@ const DoctorsOverview = () => {
     useEffect(()=>{
         const handleSearch=()=>{
         if(isSearchTriggered && search===''){
-            setDoctors(allDoctors);
+            if(filter.specialty){
+                handleFilter();
+            }
+            else{
+                setDoctors(allDoctors);
+            }
         }
         else if(isSearchTriggered && search){
             let newDoctors=[];
@@ -67,7 +72,7 @@ const DoctorsOverview = () => {
                                     }
                                 }
                             } 
-                            else if(String(value).includes((search.toLowerCase()))){
+                            else if(String(value).toLowerCase().includes((search.toLowerCase()))){
                                 if(filter.specialty && filter.specialty===doctor.specialty){
                                     newDoctors.push(doctor);  
                                     addedDoctorIds.push(doctor.id);
@@ -76,7 +81,7 @@ const DoctorsOverview = () => {
                                     newDoctors.push(doctor);
                                     addedDoctorIds.push(doctor.id);
                                 }
-                                }
+                            }
                     }
                 }
             });
@@ -102,6 +107,10 @@ const DoctorsOverview = () => {
     },[search,allDoctors]);
 
     useEffect(()=>{
+        handleFilter();
+    },[filter]);
+
+    const handleFilter=()=>{
         if(filter.specialty){
             const newDoctors=allDoctors?.filter(doctor=>{
             return doctor.specialty===filter.specialty;
@@ -111,8 +120,7 @@ const DoctorsOverview = () => {
         else{
             setDoctors(allDoctors);
         }
-        
-    },[filter]);
+    }
 
     const getSpecialties=()=>{
         let specialties=[];

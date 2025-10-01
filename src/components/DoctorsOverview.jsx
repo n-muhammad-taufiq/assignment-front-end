@@ -56,6 +56,23 @@ const DoctorsOverview = () => {
         return false;
     }
 
+     const handleSearch=()=>{
+        if(isSearchTriggered && search===''){
+            if(filter.specialty){
+                console.log('calling handlefilter');
+                handleFilter();
+            }
+            else{
+                setDoctors(allDoctors);
+            }
+        }
+        else if(isSearchTriggered && search){
+            console.log('calling getDoctorsBySearch');
+            const newDoctors=getDoctorsBySearch(search);
+            setDoctors(newDoctors);
+        }
+        }
+
     const getDoctorsBySearch=(searchValue)=>{
         let newDoctors=[];
         let addedDoctorIds=[]
@@ -86,25 +103,7 @@ const DoctorsOverview = () => {
 
 
     useEffect(()=>{
-        const handleSearch=()=>{
-        if(isSearchTriggered && search===''){
-            if(filter.specialty){
-                console.log('calling handlefilter');
-                handleFilter();
-            }
-            else{
-                setDoctors(allDoctors);
-            }
-        }
-        else if(isSearchTriggered && search){
-            console.log('calling getDoctorsBySearch');
-            const newDoctors=getDoctorsBySearch(search);
-            setDoctors(newDoctors);
-        }
-        }
-        
         let timeOut;
-        
         if(allDoctors){
             timeOut=setTimeout(()=>{
             handleSearch();
@@ -127,25 +126,7 @@ const DoctorsOverview = () => {
     const handleFilter=()=>{
         if(filter.specialty){
             if(search){
-                console.log('search is not empty ',search);
-                let newDoctors=[];
-                let addedDoctorIds=[];
-                allDoctors.forEach((doctor)=>{
-                    for(const [key,value] of Object.entries(doctor)){
-                        if(!addedDoctorIds.includes(doctor.id)){
-                            if(key==='dateOfBirth' && IsDateOfBirthMatch(doctor,search,value,false)){
-                                newDoctors.push(doctor);
-                                addedDoctorIds.push(doctor);
-                            }
-                            else if(String(value).toLowerCase.includes(search)){
-                                newDoctors.push(doctor);
-                                addedDoctorIds.push(doctor);
-                            }
-                        }
-                    }
-                });
-                newDoctors=newDoctors.filter(doctor=>doctor.specialty===filter.specialty);
-                setDoctors(newDoctors);
+                filterWithSearch();  
             }
             else{
                 const newDoctors=allDoctors?.filter(doctor=>{
@@ -154,9 +135,33 @@ const DoctorsOverview = () => {
                 setDoctors(newDoctors);
             }
         }
+        else if(search){
+            handleSearch();
+        }
         else{
             setDoctors(allDoctors);
         }
+    }
+
+    const filterWithSearch=()=>{
+        let newDoctors=[];
+        let addedDoctorIds=[];
+        allDoctors.forEach((doctor)=>{
+        for(const [key,value] of Object.entries(doctor)){
+        if(!addedDoctorIds.includes(doctor.id)){
+        if(key==='dateOfBirth' && IsDateOfBirthMatch(doctor,search,value,false)){
+        newDoctors.push(doctor);
+        addedDoctorIds.push(doctor.id);
+        }
+        else if(String(value).toLowerCase().includes(search)){
+        newDoctors.push(doctor);
+        addedDoctorIds.push(doctor.id);
+        }
+        }
+        }
+        });
+        newDoctors=newDoctors.filter(doctor=>doctor.specialty===filter.specialty);
+        setDoctors(newDoctors);
     }
 
     const getSpecialties=()=>{
@@ -205,6 +210,7 @@ const DoctorsOverview = () => {
             <div className='absolute z-20 border border-gray-100 shadow-sm text-xs text-nowrap left-1/2 transform-[translateX(-50%)] flex flex-col items-start gap-y-2 text-gray-700 font-bold bg-white p-2 rounded-sm'>
                 <button className='hover:bg-gray-100 duration-500 cursor-pointer p-1 rounded-sm w-full flex items-start' onClick={()=>{
                     setFilter({specialty:null});
+                    handleFilter();
                     setShouldShowSpecialityOptions(false);
                 }}>All</button>
                 {getSpecialties()}

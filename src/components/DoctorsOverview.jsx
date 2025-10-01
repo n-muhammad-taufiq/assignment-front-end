@@ -39,40 +39,36 @@ const DoctorsOverview = () => {
         setDoctors(allDoctors);
     },[allDoctors])
 
+    const IsDateOfBirthMatch=(doctor,searchValue,dateOfBirth,shouldFilter)=>{
+        const date=new Date(dateOfBirth);
+        const day=String(date.getDate()).padStart(2,"0");
+        const month=String(date.getMonth()+1).padStart(2,"0");
+        const year=date.getFullYear();
+        const format1=date.toLocaleString('default',{day:'numeric',month:'short',year:'numeric'}).toLowerCase();
+        const format2=`${year}/${month}/${day}`;
+        const format3=`${year}-${month}-${day}`;
 
-    useEffect(()=>{
-        const handleSearch=()=>{
-        if(isSearchTriggered && search===''){
-            if(filter.specialty){
-                handleFilter();
-            }
-            else{
-                setDoctors(allDoctors);
+        if(format1.includes(searchValue.toLowerCase())|| format2.includes(searchValue.toLowerCase()) || format3.includes(searchValue.toLowerCase())){
+            if((shouldFilter && filter.specialty && filter.specialty===doctor.specialty) || (!shouldFilter || !filter.specialty)){
+            return true;
             }
         }
-        else if(isSearchTriggered && search){
-            let newDoctors=[];
-            let addedDoctorIds=[]
-            allDoctors?.forEach((doctor)=>{
+        return false;
+    }
+
+    const getDoctorsBySearch=(searchValue)=>{
+        let newDoctors=[];
+        let addedDoctorIds=[]
+        allDoctors?.forEach((doctor)=>{
                 for(const [key,value] of Object.entries(doctor)){
                         if(!addedDoctorIds.includes(doctor.id)){
                             if(key==='dateOfBirth'){
-                            const date=new Date(value);
-                            const day=String(date.getDate()).padStart(2,"0");
-                            const month=String(date.getMonth()+1).padStart(2,"0");
-                            const year=date.getFullYear();
-                            const format1=date.toLocaleString('default',{day:'numeric',month:'short',year:'numeric'}).toLowerCase();
-                            const format2=`${year}/${month}/${day}`;
-                            const format3=`${year}-${month}-${day}`;
-
-                                if(format1.includes(search.toLowerCase())|| format2.includes(search.toLowerCase()) || format3.includes(search.toLowerCase())){
-                                    if((filter.specialty && filter.specialty===doctor.specialty) || !filter.specialty){
-                                    newDoctors.push(doctor);  
+                                if(IsDateOfBirthMatch(doctor,searchValue,value,true)){
+                                    newDoctors.push(doctor);
                                     addedDoctorIds.push(doctor.id);
-                                    }
                                 }
                             } 
-                            else if(String(value).toLowerCase().includes((search.toLowerCase()))){
+                            else if(String(value).toLowerCase().includes((searchValue.toLowerCase()))){
                                 if(filter.specialty && filter.specialty===doctor.specialty){
                                     newDoctors.push(doctor);  
                                     addedDoctorIds.push(doctor.id);
@@ -85,6 +81,24 @@ const DoctorsOverview = () => {
                     }
                 }
             });
+            return newDoctors;
+    }
+
+
+    useEffect(()=>{
+        const handleSearch=()=>{
+        if(isSearchTriggered && search===''){
+            if(filter.specialty){
+                console.log('calling handlefilter');
+                handleFilter();
+            }
+            else{
+                setDoctors(allDoctors);
+            }
+        }
+        else if(isSearchTriggered && search){
+            console.log('calling getDoctorsBySearch');
+            const newDoctors=getDoctorsBySearch(search);
             setDoctors(newDoctors);
         }
         }
@@ -112,10 +126,33 @@ const DoctorsOverview = () => {
 
     const handleFilter=()=>{
         if(filter.specialty){
-            const newDoctors=allDoctors?.filter(doctor=>{
-            return doctor.specialty===filter.specialty;
-            });
-            setDoctors(newDoctors);
+            if(search){
+                console.log('search is not empty ',search);
+                let newDoctors=[];
+                let addedDoctorIds=[];
+                allDoctors.forEach((doctor)=>{
+                    for(const [key,value] of Object.entries(doctor)){
+                        if(!addedDoctorIds.includes(doctor.id)){
+                            if(key==='dateOfBirth' && IsDateOfBirthMatch(doctor,search,value,false)){
+                                newDoctors.push(doctor);
+                                addedDoctorIds.push(doctor);
+                            }
+                            else if(String(value).toLowerCase.includes(search)){
+                                newDoctors.push(doctor);
+                                addedDoctorIds.push(doctor);
+                            }
+                        }
+                    }
+                });
+                newDoctors=newDoctors.filter(doctor=>doctor.specialty===filter.specialty);
+                setDoctors(newDoctors);
+            }
+            else{
+                const newDoctors=allDoctors?.filter(doctor=>{
+                return doctor.specialty===filter.specialty;
+                });
+                setDoctors(newDoctors);
+            }
         }
         else{
             setDoctors(allDoctors);

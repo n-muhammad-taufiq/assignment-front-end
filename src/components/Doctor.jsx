@@ -43,7 +43,7 @@ const Doctor = ({index,doctor,shouldSelectAllDoctors,selectedDoctors,setSelected
   return (
     <>
     
-    <tr className='text-sm font-bold '>
+    <tr className='text-sm font-bold'>
         <td className='p-3'>
             <div className='flex items-center gap-x-2'>
             <input onChange={(event)=>{
@@ -76,7 +76,13 @@ const Doctor = ({index,doctor,shouldSelectAllDoctors,selectedDoctors,setSelected
         <td className='p-3'>{currentDoctor.specialty}</td>
         <td className='p-3'>{new Date(currentDoctor.dateOfBirth).toLocaleString('default',{day:'numeric',month:'short',year:'numeric'})}</td>
         <td className='p-3'>{currentDoctor.emailAddress}</td>
-        <td className='p-3'>{currentDoctor.status}</td>
+        <td className='p-3'>
+        {currentDoctor.status==='active' ? 
+        <button className="py-1 px-10 bg-emerald-50 border border-emerald-200 text-emerald-300 rounded-full font-bold">Active</button> 
+        :
+        <button className="py-1 px-10 bg-red-50 border border-red-200 text-red-300 rounded-full font-bold">Inactive</button>   
+        }
+        </td>
         <td className='p-3'>+{currentDoctor.countryCode} {currentDoctor.contactNumber}</td>
         <td className='p-3'>
             <div className='relative flex gap-x-1 w-20 h-5 '>

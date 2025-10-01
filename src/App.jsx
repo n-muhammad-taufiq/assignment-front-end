@@ -7,13 +7,15 @@ import ProtectedRoute from "./components/ProtectedRoute"
 
 function App() {
 
-  return (
+  return(
    <Routes>
     <Route path="/" element={<ProtectedLayout></ProtectedLayout>}>
     <Route path="" element={<ProtectedRoute><Dashboard></Dashboard></ProtectedRoute>}></Route>
     </Route>
    </Routes>
-  )
+  ) 
 }
 
 export default App
+
+  

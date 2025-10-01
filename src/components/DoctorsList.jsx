@@ -123,7 +123,7 @@ const DoctorsList = ({allDoctors,doctors,setAllDoctors}) => {
         <tbody>
             {doctors?.map((doctor,index)=>(
                 <Doctor index={index} key={doctor.id} doctor={doctor} shouldSelectAllDoctors={shouldSelectAllDoctors} selectedDoctors={selectedDoctors} setSelectedDoctors={setSelectedDoctors} 
-                setActionStatus={setActionStatus} handleDeleteDoctor={handleDeleteDoctor} shouldShowActionMenu={shouldShowActionMenu} setShouldShowActionMenu={setShouldShowActionMenu}></Doctor>
+                setActionStatus={setActionStatus} handleDeleteDoctor={handleDeleteDoctor} shouldShowActionMenu={shouldShowActionMenu} setShouldShowActionMenu={setShouldShowActionMenu} allDoctors={allDoctors} setAllDoctors={setAllDoctors}></Doctor>
             ))}
         </tbody>    
     </table>

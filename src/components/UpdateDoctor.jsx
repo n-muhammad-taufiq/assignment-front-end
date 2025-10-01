@@ -2,7 +2,7 @@ import React, { useContext, useEffect, useRef, useState } from 'react'
 import Loading from './Loading';
 import { AuthContext } from '../../context/AuthProvider';
 
-const UpdateDoctor = ({doctor,setCurrentDoctor,setShouldUpdateDoctor,setActionStatus}) => {
+const UpdateDoctor = ({doctor,setCurrentDoctor,setShouldUpdateDoctor,setActionStatus,allDoctors,setAllDoctors}) => {
      const [doctorDetails,setDoctorDetails]=useState({id:doctor.id,name:doctor.name,specialty:doctor.specialty,dateOfBirth:doctor.dateOfBirth.split('T')[0],emailAddress:doctor.emailAddress,status:doctor.status,countryCode:doctor.countryCode,contactNumber:doctor.contactNumber,profilePhoto:doctor.profilePhoto,userId:doctor.userId});
      const [shouldShowStatusOptions,setShouldShowStatusOptions]=useState(false);
      const [imagePreview,setImagePreview]=useState(doctorDetails.profilePhoto);
@@ -45,10 +45,13 @@ const UpdateDoctor = ({doctor,setCurrentDoctor,setShouldUpdateDoctor,setActionSt
          };
          const url='https://tectraclinic.onrender.com/doctors'
          const responseObj=await fetchWithAuth(url,options);
-         const response=await responseObj.json();
          if(responseObj.ok){
             setCurrentDoctor(data);
             setActionStatus('Doctor Updated Successfully')
+            let currentDoctor=data;
+            const newDoctors=allDoctors.filter(doctor=>doctor.id!=currentDoctor.id);
+            newDoctors.push(currentDoctor);
+            setAllDoctors(newDoctors);
             setIsLoading(false);
             setShouldUpdateDoctor(false);   
          }

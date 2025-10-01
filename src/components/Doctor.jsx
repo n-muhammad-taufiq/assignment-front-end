@@ -3,7 +3,7 @@ import UpdateDoctor from './UpdateDoctor';
 import {createPortal} from 'react-dom'
 import Loading from './Loading';
 
-const Doctor = ({index,doctor,shouldSelectAllDoctors,selectedDoctors,setSelectedDoctors,setActionStatus,handleDeleteDoctor,shouldShowActionMenu,setShouldShowActionMenu}) => {
+const Doctor = ({index,doctor,shouldSelectAllDoctors,selectedDoctors,setSelectedDoctors,setActionStatus,handleDeleteDoctor,shouldShowActionMenu,setShouldShowActionMenu,allDoctors,setAllDoctors}) => {
     const [currentDoctor,setCurrentDoctor]=useState(doctor);
     const [isSelected,setIsSelected]=useState(false);
     const [shouldShowOptions,setShouldShowOptions]=useState(false);
@@ -34,7 +34,7 @@ const Doctor = ({index,doctor,shouldSelectAllDoctors,selectedDoctors,setSelected
 
     const UpdateDoctorPortal=()=>{
         return createPortal(
-            <UpdateDoctor doctor={currentDoctor} setCurrentDoctor={setCurrentDoctor} setShouldUpdateDoctor={setShouldUpdateDoctor} setActionStatus={setActionStatus}></UpdateDoctor>,
+            <UpdateDoctor doctor={currentDoctor} setCurrentDoctor={setCurrentDoctor} setShouldUpdateDoctor={setShouldUpdateDoctor} setActionStatus={setActionStatus} allDoctors={allDoctors} setAllDoctors={setAllDoctors}></UpdateDoctor>,
             document.body
         )
     }

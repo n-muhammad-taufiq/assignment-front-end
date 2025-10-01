@@ -106,7 +106,7 @@ const DoctorsList = ({allDoctors,doctors,setAllDoctors}) => {
     </div>
     </div>
 
-    <div className='overflow-x-auto hide-scrollbar scroll-smooth '>
+    <div className='overflow-x-auto hide-scrollbar scroll-smooth pb-10 '>
         <table className='max-w-full min-w-full'>
         <thead>
         <tr className='bg-gray-100 max-w-full'>

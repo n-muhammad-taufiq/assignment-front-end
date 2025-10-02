@@ -65,7 +65,7 @@ const Doctor = ({index,doctor,shouldSelectAllDoctors,selectedDoctors,setSelected
                 <img className='max-w-full h-auto aspect-square rounded-full object-cover mb-1' src={currentDoctor.profilePhoto} alt="" />
                 </div>
                 :
-                <svg className='bi bi-person-fill fill-gray-200 h-8 w-8 ' xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16">
+                <svg className='bi bi-person-fill fill-gray-200 h-10 w-10 ' xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16">
                 <path d="M3 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6"/>
                 </svg>
                 }
@@ -78,9 +78,9 @@ const Doctor = ({index,doctor,shouldSelectAllDoctors,selectedDoctors,setSelected
         <td className='p-3'>{currentDoctor.emailAddress}</td>
         <td className='p-3'>
         {currentDoctor.status==='Active' ? 
-        <button className="py-1 px-10 bg-emerald-50 border border-emerald-200 text-emerald-300 rounded-full font-bold">Active</button> 
+        <span className="py-2 px-10 bg-emerald-50 border border-emerald-200 text-emerald-300 rounded-full font-bold">Active</span> 
         :
-        <button className="py-1 px-9 bg-red-50 border border-red-200 text-red-300 rounded-full font-bold">Inactive</button>   
+        <span className="py-2 px-9 bg-red-50 border border-red-200 text-red-300 rounded-full font-bold">Inactive</span>   
         }
         </td>
         <td className='p-3'>+{currentDoctor.countryCode} {currentDoctor.contactNumber}</td>

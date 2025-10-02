@@ -4,7 +4,7 @@ import Loading from './Loading';
 import { AuthContext } from '../../context/AuthProvider';
 
 const AddDoctor = ({setShouldAddDoctor,allDoctors,setAllDoctors,setActionStatus}) => {
-     const [doctorDetailsInput,setDoctorDetailsInput]=useState({name:"",specialty:"",dateOfBirth:"",emailAddress:"",status:"Active",countryCode:"91",contactNumber:"",profilePhoto:""});
+     const [doctorDetailsInput,setDoctorDetailsInput]=useState({name:"",specialty:"",dateOfBirth:"",emailAddress:"",status:"Active",countryCode:"91",contactNumber:"",profilePhoto:"",joiningDate:Date.now()});
      const [shouldShowStatusOptions,setShouldShowStatusOptions]=useState(false);
      const [imagePreview,setImagePreview]=useState(null);
      const imageInputRef=useRef(null);

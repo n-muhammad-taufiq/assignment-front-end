@@ -199,7 +199,7 @@ const DoctorsOverview = () => {
                     else if(filter.joiningDate==='Last Month'){
                         date.setMonth(date.getMonth()-1);
                     }
-                    date.setHours(0,0,0,0,);
+                    date.setHours(0,0,0,0);
                     newDoctors=newDoctors.filter((doctor)=>{
                         const joiningDate=new Date(doctor.joiningDate);
                         joiningDate.setHours(0,0,0,0);

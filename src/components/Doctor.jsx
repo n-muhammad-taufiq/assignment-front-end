@@ -80,7 +80,7 @@ const Doctor = ({index,doctor,shouldSelectAllDoctors,selectedDoctors,setSelected
         {currentDoctor.status==='Active' ? 
         <button className="py-1 px-10 bg-emerald-50 border border-emerald-200 text-emerald-300 rounded-full font-bold">Active</button> 
         :
-        <button className="py-1 px-10 bg-red-50 border border-red-200 text-red-300 rounded-full font-bold">Inactive</button>   
+        <button className="py-1 px-9 bg-red-50 border border-red-200 text-red-300 rounded-full font-bold">Inactive</button>   
         }
         </td>
         <td className='p-3'>+{currentDoctor.countryCode} {currentDoctor.contactNumber}</td>

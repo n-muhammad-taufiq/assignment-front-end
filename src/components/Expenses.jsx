@@ -38,7 +38,7 @@ const Expenses = () => {
                     <div style={{borderColor:expenses[1].borderColor}} className='h-64 w-64 max-lg:h-56 max-lg:w-56 max-md:h-48 max-md:w-48 max-sm:h-40 max-sm:w-40 border-4 rounded-full p-4 flex items-center justify-center'>
                         <div style={{borderColor:expenses[2].borderColor}} className='h-56 w-56 max-lg:h-48 max-lg:w-48 max-md:h-40 max-md:w-40 max-sm:h-32 max-sm:w-32 border-4 rounded-full p-4 flex flex-col gap-y-3 items-center justify-center font-bold'>
                             <p>Total</p>
-                            <p className='text-2xl max-lg:text-base max-md:text-sm max-sm:text-xs'>₹{expensesData.totalExpenses}</p>
+                            <p className='text-2xl max-lg:text-base max-md:text-sm max-sm:text-xs'>{new Intl.NumberFormat('en-IN',{style:'currency',currency:'INR',minimumFractionDigits:0,maximumFractionDigits:2}).format(expensesData.totalExpenses).replace('₹','')}</p>
                         </div>
                     </div>
                 </div>
@@ -49,7 +49,7 @@ const Expenses = () => {
                     <span style={{backgroundColor:expense.borderColor}} className='h-4 w-4 rounded-full'></span>
                     <span className='text-xs'>{expense.expenseName}</span>
                     </div>
-                    <p className='max-lg:text-xs'>₹{expense.amount}</p>
+                    <p className='max-lg:text-xs font-bold'>{new Intl.NumberFormat('en-IN',{style:'currency',currency:'INR',minimumFractionDigits:0,maximumFractionDigits:2}).format(expense.amount)}</p>
                     </div>
                     ))}
                 </div>

@@ -94,14 +94,14 @@ const AddDoctor = ({setShouldAddDoctor,allDoctors,setAllDoctors,setActionStatus}
            
          }
          catch(error){
-           console.log(error);
+           console.error(error);
          }
      }
  
    return (
     <>
      <div className='fixed z-30 top-0 left-0 right-0 bottom-0 bg-black/90 flex items-center justify-center py-3 p-3'>
-         <div className='fade-in flex flex-col gap-y-10 items-start bg-white px-1 rounded-lg text-sm h-full max-w-full font-bold overflow-y-auto hide-scrollbar'>
+         <div className='fade-in flex flex-col gap-y-12 items-start bg-white px-1 rounded-lg text-sm h-full max-w-full font-bold overflow-y-auto hide-scrollbar'>
  
               <div className='bg-white z-20 pb-2 flex sticky top-0 w-full  max-w-full justify-center pt-1'>
               <button onClick={()=>{
@@ -122,16 +122,16 @@ const AddDoctor = ({setShouldAddDoctor,allDoctors,setAllDoctors,setActionStatus}
               }
              
              {  imagePreview ?
-                <div className='h-32 w-32 flex flex-col gap-y-3 self-center max-w-full'>
+                <div className='h-32 w-32 flex flex-col gap-y-3  self-center max-w-full'>
                 <img onClick={()=>{
                 imageInputRef.current.click();
-                }} className='rounded-full h-full w-full aspect-[1/1] object-cover hover:opacity-50 duration-500 cursor-pointer' src={imagePreview} alt="" />
+                }} className='rounded-full h-auto max-w-full aspect-[1/1] object-cover hover:opacity-50 duration-500 cursor-pointer' src={imagePreview} alt="" />
                 <button onClick={()=>{
                     setDoctorDetailsInput({...doctorDetailsInput,profilePhoto:''});  
                     setProfilePhoto(null);
                     setImagePreview(null);
-                }} className=' cursor-pointer hover:opacity-50 duration-500 self-center p-1 ml-1 bg-white h-6 w-6 rounded-full border border-gray-50 flex items-center justify-center'>
-                <svg className='fill-gray-600' xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash" viewBox="0 0 16 16">
+                }} className=' cursor-pointer hover:opacity-50 duration-500 self-center p-1 ml-1 bg-white h-6 w-6 rounded-full flex items-center justify-center'>
+                <svg className='fill-gray-500' xmlns="http://www.w3.org/2000/svg" width="12" height="12" fill="currentColor" class="bi bi-trash" viewBox="0 0 16 16">
                 <path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0z"/>
                 <path d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4zM2.5 3h11V2h-11z"/>
                 </svg>

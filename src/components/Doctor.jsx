@@ -59,15 +59,15 @@ const Doctor = ({index,doctor,shouldSelectAllDoctors,selectedDoctors,setSelected
         </td>
 
         <td className='p-3'>
-            <div className='flex items-center gap-x-3'>
+            <div className='flex items-center gap-x-3 '>
                 {currentDoctor.profilePhoto ?
-                <img className='h-8 w-8 aspect-square rounded-full object-cover mb-1' src={currentDoctor.profilePhoto} alt="" />
+                <div  className='h-10 w-10 flex '>
+                <img className='max-w-full h-auto aspect-square rounded-full object-cover mb-1' src={currentDoctor.profilePhoto} alt="" />
+                </div>
                 :
-                <span className='self-center flex items-center justify-center h-8 w-8 bg-gray-100 p-1 rounded-full'>
-                <svg className='bi bi-person-fill fill-gray-200 ' xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16">
+                <svg className='bi bi-person-fill fill-gray-200 h-8 w-8 ' xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16">
                 <path d="M3 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6"/>
                 </svg>
-                </span>
                 }
                 <p>{currentDoctor.name}</p>
             </div>

@@ -11,7 +11,6 @@ const DoctorsList = ({allDoctors,doctors,setAllDoctors}) => {
     const [selectedDoctors,setSelectedDoctors]=useState([]);  
     const [shouldAddDoctor,setShouldAddDoctor]=useState(false);  
     const [actionStatus,setActionStatus]=useState('');
-    const [isLoading,setIsLoading]=useState(false);
     const [shouldShowActionMenu,setShouldShowActionMenu]=useState({doctorId:null});
     const {fetchWithAuth}=useContext(AuthContext);
 
@@ -73,7 +72,7 @@ const DoctorsList = ({allDoctors,doctors,setAllDoctors}) => {
             setAllDoctors(newDoctors);
         }
         catch(error){
-            console.log(error);
+            console.error(error);
         }
         if(shouldSelectAllDoctors){
             setShouldSelectAllDoctors(false);

@@ -17,6 +17,15 @@ const AuthProvider = ({children}) => {
 
   const login=async (loginDetails)=>{
     try {
+      const url='https://tectraclinic.onrender.com/login'
+      const options={
+        headers:{
+          'Content-Type':'application/json'
+        },
+        method:'POST',
+        body:JSON.stringify(loginDetails),
+        credentials:"include"
+      }
       const responseObj=await fetch('https://tectraclinic.onrender.com/login',{
         headers:{
           'Content-Type':'application/json'
@@ -41,7 +50,7 @@ const AuthProvider = ({children}) => {
 
   const refreshToken=async()=>{
     try{
-    const responseObj=await fetch('https://tectraclinic.onrender.com/login',{
+    const responseObj=await fetch('https://tectraclinic.onrender.com/refreshToken',{
       headers:{
         'Authorization':`Bearer ${accessToken}`
       },
@@ -93,9 +102,6 @@ const AuthProvider = ({children}) => {
     login({emailAddress:'dhanush@gmail.com',password:'test_password'});
   },[]);
 
-
-
-  const value={login};
 
   return (
     <AuthContext.Provider value={{login,userData,fetchWithAuth}}>

@@ -54,7 +54,7 @@ const Doctor = ({index,doctor,shouldSelectAllDoctors,selectedDoctors,setSelected
                     handleRemoveFromSelected();
                 }
             }} checked={isSelected} type="checkbox" name="" id="" />
-            <p>{index<10 ? `0${index+1}` : index+1}</p>
+            <p>{index<9 ? `0${index+1}` : index+1}</p>
             </div>
         </td>
 

@@ -3,11 +3,13 @@
 @font-face {
   font-family: "raleway";
   src: url('/assets/fonts/Raleway-Regular.ttf');
+  font-display: swap;
 }
 
 @font-face {
   font-family: 'poppins';
   src: url('/assets/fonts/Poppins-Regular.ttf');
+  font-display: swap;
 }
 
 @keyframes fadeIn {

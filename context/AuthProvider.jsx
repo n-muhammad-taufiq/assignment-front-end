@@ -81,7 +81,7 @@ const AuthProvider = ({children}) => {
                 token=await refreshToken();
             }
             catch(error){
-              console.log(error);
+              throw error;
             }
             options.headers['Authorization']=`Bearer ${token}`;
             responseObj=await fetch(url,options);

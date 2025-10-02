@@ -100,7 +100,7 @@ const AddDoctor = ({setShouldAddDoctor,allDoctors,setAllDoctors,setActionStatus}
  
    return (
     <>
-     <div className='fixed z-30 top-0 left-0 right-0 bottom-0 bg-black/90 flex items-center justify-center py-3 p-3'>
+     <div className='fixed z-50 top-0 left-0 right-0 bottom-0 bg-black/90 flex items-center justify-center py-3 p-3'>
          <div className='fade-in flex flex-col gap-y-12 items-start bg-white px-1 rounded-lg text-sm h-full max-w-full font-bold overflow-y-auto hide-scrollbar'>
  
               <div className='bg-white z-20 pb-2 flex sticky top-0 w-full  max-w-full justify-center pt-1'>

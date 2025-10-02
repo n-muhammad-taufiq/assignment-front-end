@@ -74,7 +74,7 @@ const Doctor = ({index,doctor,shouldSelectAllDoctors,selectedDoctors,setSelected
         </td>
 
         <td className='p-3'>{currentDoctor.specialty}</td>
-        <td className='p-3'>{new Date(currentDoctor.dateOfBirth).toLocaleString('default',{day:'numeric',month:'short',year:'numeric'})}</td>
+        <td className='p-3 '>{new Date(currentDoctor.dateOfBirth).toLocaleString('default',{day:'numeric',month:'short',year:'numeric'})}</td>
         <td className='p-3'>{currentDoctor.emailAddress}</td>
         <td className='p-3'>
         {currentDoctor.status==='Active' ? 

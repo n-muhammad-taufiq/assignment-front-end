@@ -5,6 +5,11 @@
   src: url('/assets/fonts/Raleway-Regular.ttf');
 }
 
+@font-face {
+  font-family: 'poppins';
+  src: url('/assets/fonts/Poppins-Regular.ttf');
+}
+
 @keyframes fadeIn {
   from{
     opacity:0;
@@ -60,6 +65,9 @@ body{
 .fade-in{
   animation-name: fadeIn;
   animation-duration: 0.7s;
+}
+.poppins{
+  font-family:poppins;
 }
 .loading{
   animation-name: loading;

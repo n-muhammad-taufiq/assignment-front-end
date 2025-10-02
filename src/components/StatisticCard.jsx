@@ -13,17 +13,17 @@ const StatisticCard = ({title,previousValue,currentValue,total}) => {
             </button>
         </div>
         <div className='flex max-lg:text-sm max-md:text-xs items-baseline gap-x-2 '>
-        <p className='font-bold max-lg:text-sm max-md:text-xs'>{total}</p>
+        <p className='font-bold max-lg:text-sm max-md:text-xs poppins'>{total}</p>
         {percentageChange>0 ?
         <div className='flex items-center text-green-500 text-xs    '>
-            <p>+{percentageChange}%</p>
+            <p className='poppins'>+{percentageChange}%</p>
             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-up-short" viewBox="0 0 16 16">
             <path fill-rule="evenodd" d="M8 12a.5.5 0 0 0 .5-.5V5.707l2.146 2.147a.5.5 0 0 0 .708-.708l-3-3a.5.5 0 0 0-.708 0l-3 3a.5.5 0 1 0 .708.708L7.5 5.707V11.5a.5.5 0 0 0 .5.5"/>
             </svg>
         </div>  
         :
         <div className='flex items-center text-red-500 text-xs'>
-            <p>{percentageChange}%</p>
+            <p className='poppins'>{percentageChange}%</p>
             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-down-short" viewBox="0 0 16 16">
             <path fill-rule="evenodd" d="M8 4a.5.5 0 0 1 .5.5v5.793l2.146-2.147a.5.5 0 0 1 .708.708l-3 3a.5.5 0 0 1-.708 0l-3-3a.5.5 0 1 1 .708-.708L7.5 10.293V4.5A.5.5 0 0 1 8 4"/>
             </svg>

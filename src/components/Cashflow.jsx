@@ -16,7 +16,7 @@ const Cashflow = ({data}) => {
       <div className='flex max-lg:items-start max-md:text-xs justify-between px-4 items-center'>
         <div className='flex max-lg:flex-col max-lg:items-start max-lg:gap-y-1 items-center gap-x-4 font-bold'>
         <span className='text-sm max-lg:text-xs'>Total</span>
-        <span className='text-xl max-lg:text-sm max-md:text-xs'>{(new Intl.NumberFormat('en-IN',{style:'currency',currency:'INR',minimumFractionDigits:0,maximumFractionDigits:2}).format(data.totalCashflow)).replace('₹','')}</span>
+        <span className='text-3xl  max-lg:text-sm max-md:text-xs poppins font-bold'>{(new Intl.NumberFormat('en-IN',{style:'currency',currency:'INR',minimumFractionDigits:0,maximumFractionDigits:2}).format(data.totalCashflow)).replace('₹','')}</span>
         </div>
 
         <div className='flex items-center gap-x-4'>

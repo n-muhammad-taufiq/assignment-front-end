@@ -47,16 +47,13 @@ const DoctorsOverview = () => {
         }
     },[allDoctors,userData])
 
-    useEffect(()=>{
-        setDoctors(allDoctors);
-    },[allDoctors]);
 
      useEffect(()=>{
         let timeOut;
         if(allDoctors && isSearchTriggered){
             timeOut=setTimeout(()=>{
             handleSearch();
-            },1000) 
+            },1500) 
         }
         
         return ()=>{
@@ -68,14 +65,15 @@ const DoctorsOverview = () => {
     },[search,allDoctors]);
 
     useEffect(()=>{
-        handleFilter();
+        if(filter.joiningDate || filter.specialty){
+             handleFilter();
+        }
     },[filter])
 
     useEffect(()=>{
         setDoctors(allDoctors);
     },[allDoctors]);
 
-   
 
     const IsDateOfBirthMatch=(doctor,searchValue,dateOfBirth,shouldFilter)=>{
         const date=new Date(dateOfBirth);
@@ -180,7 +178,6 @@ const DoctorsOverview = () => {
         console.log('final newDoctors array :',newDoctors);
         return newDoctors;
     }
-
 
     const handleFilter=()=>{
         if(filter.specialty || filter.joiningDate){

@@ -68,7 +68,7 @@ const AddDoctor = ({setShouldAddDoctor,allDoctors,setAllDoctors,setActionStatus}
          const response=await responseObj.json();
          if(responseObj.status===201){
           data.id=generateRandomId();
-          setActionStatus('Doctor Added Successfully')
+          setActionStatus('Doctor Added Successfully');
           setAllDoctors([...allDoctors,data]);
           setIsLoading(false);
           setShouldAddDoctor(false);

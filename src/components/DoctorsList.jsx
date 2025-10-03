@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from 'react'
+import React, { use, useContext, useEffect, useState } from 'react'
 import Doctor from './Doctor'
 import ListColumn from './ListColumn'
 import UpdateDoctor from './UpdateDoctor'
@@ -22,6 +22,19 @@ const DoctorsList = ({allDoctors,doctors,setAllDoctors}) => {
             setShouldSelectAllDoctors(true);
         }
     },[selectedDoctors])
+
+    useEffect(()=>{
+        let timeOut;
+        if(actionStatus){
+            timeOut=setTimeout(()=>{
+                setActionStatus(false);
+            },3000);
+        }
+
+        return ()=>{
+            clearTimeout(timeOut);
+        }
+    },[actionStatus])
 
     const handleDeleteDoctor=async (doctor)=>{
 
@@ -133,7 +146,7 @@ const DoctorsList = ({allDoctors,doctors,setAllDoctors}) => {
     <AddDoctor setShouldAddDoctor={setShouldAddDoctor} setActionStatus={setActionStatus} allDoctors={allDoctors} setAllDoctors={setAllDoctors}></AddDoctor>
     }
 
-    {actionStatus.message &&
+    {actionStatus &&
     <ActionStatus actionStatus={actionStatus}></ActionStatus>
     }
     </>

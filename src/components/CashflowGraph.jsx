@@ -19,7 +19,7 @@ const CashflowGraph = ({graphData}) => {
           <stop offset={'100%'} stopColor='#7597a5' stopOpacity={0}></stop>
           </linearGradient>
         </defs>
-        <Area type={'monotone'} dataKey={'Income'} stroke='#7597a5'  strokeWidth={2} fill={'url(#shadeColor)'}></Area>
+        <Area type={'monotone'} dataKey={'Income'} stroke='#7597a5'  strokeWidth={2} fill={'url(#shadeColor)'} isAnimationActive={false}></Area>
         </AreaChart>  
     </ResponsiveContainer>    
   )

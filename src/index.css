@@ -51,9 +51,6 @@
   }
 }
 
-*{
-  scroll-behavior: smooth;
-}
 
 *::-webkit-scrollbar{
 display: none;
@@ -67,6 +64,7 @@ body{
 .fade-in{
   animation-name: fadeIn;
   animation-duration: 0.7s;
+  animation-timing-function: ease;
 }
 .poppins{
   font-family:poppins;

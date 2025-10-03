@@ -52,6 +52,7 @@ const UpdateDoctor = ({doctor,setCurrentDoctor,setShouldUpdateDoctor,setActionSt
             newDoctors.push(currentDoctor);
             newDoctors.sort((a,b)=>a.id-b.id);  
             setAllDoctors(newDoctors);
+            setActionStatus('Doctor Updated Successfully');
             setIsLoading(false);
             setShouldUpdateDoctor(false);   
          }

@@ -37,6 +37,6 @@ const StatisticCard = ({title,previousValue,currentValue,total}) => {
   )
 }
 
-export default StatisticCard
+export default React.memo(StatisticCard)
 
 //h-10 w-18 max-lg:h-10 max-lg:w-12 max-h-full max-w-full self-baseline

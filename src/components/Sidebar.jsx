@@ -235,4 +235,4 @@ const Sidebar = ({shouldOpenMenu=false,setShouldOpenMenu}) => {
   )
 }
 
-export default Sidebar
+export default React.memo(Sidebar);

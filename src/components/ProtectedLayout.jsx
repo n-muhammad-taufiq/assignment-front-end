@@ -8,7 +8,7 @@ const ProtectedLayout = () => {
     <div className='flex min-h-screen overflow-hidden '>
       <Sidebar></Sidebar>
 
-      <div className='flex flex-col w-full h-screen overflow-y-auto overflow-x-hidden bg-gray-100 hide-scrollbar'>
+      <div className='flex flex-col w-full h-screen overflow-y-auto overflow-x-hidden bg-gray-100 hide-scrollbar scrolll-smooth'>
       <Header></Header>
       <Outlet></Outlet>
       </div>

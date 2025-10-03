@@ -1,7 +1,8 @@
- import React, { useContext, useEffect, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import DoctorsList from './DoctorsList'
 import { AuthContext } from '../../context/AuthProvider';
 import Loading from './Loading';
+import { useMemo } from 'react';
 
 const DoctorsOverview = () => {
 
@@ -10,11 +11,19 @@ const DoctorsOverview = () => {
     const [search,setSearch]=useState('');
     const [shouldShowSpecialityOptions,setShouldShowSpecialityOptions]=useState(false);
     const [shouldShowJoiningDateOptions,setShouldShowJoiningDateOptions]=useState(false);
-    
     const [filter,setFilter]=useState({specialty:null,joiningDate:''});
     const [isSearchTriggered,setIsSearchTriggered]=useState(false);
     const {userData,fetchWithAuth}=useContext(AuthContext);
+
+    const [isLoading,setIsLoading]=useState(true);
     
+      useEffect(()=>{
+        if(isLoading && allDoctors && doctors ){
+            setIsLoading(false);
+        }
+        
+      },[allDoctors,doctors])
+ 
     useEffect(()=>{
         const fetchDoctors=async()=>{
             try{
@@ -44,12 +53,11 @@ const DoctorsOverview = () => {
 
      useEffect(()=>{
         let timeOut;
-        if(allDoctors){
+        if(allDoctors && isSearchTriggered){
             timeOut=setTimeout(()=>{
             handleSearch();
             },1000) 
         }
-        
         
         return ()=>{
             if(timeOut){
@@ -110,6 +118,7 @@ const DoctorsOverview = () => {
         } 
         }
     }
+    
 
     const getDoctorsBySearch=(searchValue)=>{
         console.log('inside getDoctorsBySearch');
@@ -279,10 +288,14 @@ const DoctorsOverview = () => {
         })
     }
 
+       
+    if(isLoading){
+        return <Loading></Loading>
+    }
 
     if(allDoctors && doctors){
         return (
-        <div className='flex flex-col bg-white  max-w-full w-full rounded-lg overflow-clip '>
+        <div className='flex flex-col gap-y-2 bg-white  max-w-full w-full rounded-lg overflow-clip pb-5 '>
         <div className='flex border border-gray-50 bg-white max-w-full max-lg:flex-col max-lg:items-start max-lg:gap-y-3 w-full justify-between items-center p-3 '>
         <h1 className='font-bold max-lg:text-sm max-md:text-xs text-nowrap'>Doctors Overview</h1>
         <div className='flex w-full justify-end max-lg:flex-col max-lg:items-start max-lg:gap-y-3 max-w-full gap-x-4 items-center'>
@@ -361,17 +374,12 @@ const DoctorsOverview = () => {
 
         </div>
 
-        
-
-        
+    
         </div>
         </div>
         <DoctorsList allDoctors={allDoctors} doctors={doctors} setAllDoctors={setAllDoctors}></DoctorsList>
         </div>
         )
-    }
-    else{
-        return <Loading></Loading>
     }
 }
 

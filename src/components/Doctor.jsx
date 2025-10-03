@@ -62,7 +62,7 @@ const Doctor = ({index,doctor,shouldSelectAllDoctors,selectedDoctors,setSelected
             <div className='flex items-center gap-x-3 '>
                 {currentDoctor.profilePhoto ?
                 <div  className='h-10 w-10 flex '>
-                <img className='max-w-full h-auto aspect-square rounded-full object-cover mb-1' src={currentDoctor.profilePhoto} alt="" />
+                <img className='max-w-full h-auto aspect-square rounded-full object-cover mb-1' src={currentDoctor.profilePhoto} loading='lazy'/>
                 </div>
                 :
                 <svg className='bi bi-person-fill fill-gray-200 h-10 w-10 ' xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16">
@@ -122,4 +122,4 @@ const Doctor = ({index,doctor,shouldSelectAllDoctors,selectedDoctors,setSelected
   )
 }
 
-export default Doctor
+export default React.memo(Doctor);

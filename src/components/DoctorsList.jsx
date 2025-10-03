@@ -85,7 +85,7 @@ const DoctorsList = ({allDoctors,doctors,setAllDoctors}) => {
 
   return (
     <>
-    <div className='flex border-b border-gray-50 pb-2 w-full justify-end max-lg:justify-start  items-center px-3 gap-x-5'>
+    <div className='flex border-b border-gray-50  w-full justify-end max-lg:justify-start items-center px-3 gap-x-5 '>
     <div className='flex gap-x-5 '>
         {selectedDoctors.length>0 
         &&
@@ -105,7 +105,7 @@ const DoctorsList = ({allDoctors,doctors,setAllDoctors}) => {
     </div>
     </div>
 
-    <div className='overflow-x-auto hide-scrollbar scroll-smooth pb-10 h-100 overflow-auto '>
+    <div className='overflow-x-auto hide-scrollbar  pb-10 h-100 overflow-auto border-b-2 border-gray-200 '>
         <table className='max-w-full min-w-full'>
         <thead>
         <tr className='bg-gray-100 max-w-full sticky top-0 scroll-smooth z-20'>
@@ -140,18 +140,4 @@ const DoctorsList = ({allDoctors,doctors,setAllDoctors}) => {
   )
 }
 
-export default DoctorsList
-
-/*<div className='flex flex-col w-full justify-between text-gray-600 font-bold'>
-        <div className='flex w-full bg-gray-100 justify-between items-center p-3'>
-        <ListColumn columnName={'No'}></ListColumn>
-        <ListColumn columnName={'Name'}></ListColumn>
-        <ListColumn columnName={'Specialty'}></ListColumn>
-        <ListColumn columnName={'DOB'}></ListColumn>
-        <ListColumn columnName={'Email Address'}></ListColumn>
-        <ListColumn columnName={'Status'}></ListColumn>
-        <ListColumn columnName={'Contact'}></ListColumn>
-        <ListColumn columnName={'Action'}></ListColumn>
-        </div>
-        <Doctor></Doctor>
-    </div>*/
+export default React.memo(DoctorsList);

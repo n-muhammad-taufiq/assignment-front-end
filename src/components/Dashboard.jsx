@@ -1,12 +1,16 @@
-import React from 'react'
+import React, {useState, useEffect, Suspense } from 'react'
 import StatisticCard from './StatisticCard'
 import Cashflow from './Cashflow'
 import Expenses from './Expenses'
-import DoctorsOverview from './DoctorsOverview'
+import { useSearchParams } from 'react-router-dom'
+import Loading from './Loading'
+
+const DoctorsOverview=React.lazy(()=>import('./DoctorsOverview'));
 
 const Dashboard = () => {
+
   return (
-    <div className='flex flex-col gap-y-5 p-5 w-full h-full'>
+    <div className='flex flex-col gap-y-5 p-5 w-full h-full fadein'>
         <h1 className='text-lg max-lg:text-sm max-sm:text-xs font-bold'>Dashboard <span className='text-slate-300'>/ Analytics and Reports</span></h1>
         <div className='grid grid-cols-[repeat(auto-fit,minmax(200px,1fr))] justify-around max-w-full w-full max-md:justify-items-start gap-3'>
         <StatisticCard title={'Total Visitors'} previousValue={100} currentValue={136} total={42946}></StatisticCard>
@@ -34,7 +38,9 @@ const Dashboard = () => {
         }}></Cashflow>
         <Expenses></Expenses>
         </div>
+       <Suspense fallback={<Loading></Loading>}>
         <DoctorsOverview></DoctorsOverview>
+       </Suspense>
     </div>
   )
 }
